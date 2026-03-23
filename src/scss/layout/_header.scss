@@ -1,0 +1,209 @@
+#wpadminbar+.site-header {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    #wpadminbar+.site-header {
+        top: 46px;
+    }
+}
+
+#wpadminbar+.site-header+#mobile-drawer {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    #wpadminbar+.site-header+#mobile-drawer {
+        top: 46px;
+    }
+}
+
+.site-header {
+    background-color: rgba($color-bg, 0.95);
+    border-bottom: 1px solid rgba($color-secondary, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+    }
+}
+
+.site-branding {
+    .site-title {
+        margin: 0;
+        font-family: $font-grotesk;
+        font-size: 24px;
+        font-weight: 700;
+
+        a {
+            color: $color-secondary;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+}
+
+.main-navigation {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 2px;
+
+        a {
+            color: $color-primary;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 6px 14px;
+
+            &:hover {
+                color: $color-secondary;
+                background-color: #141720;
+            }
+        }
+
+        li.current-menu-item a {
+            color: $color-secondary;
+        }
+    }
+}
+
+// Burger Menu
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+
+    span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: $color-secondary;
+        border-radius: 2px;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @include media-down(lg) {
+        display: flex;
+    }
+}
+
+// Mobile Drawer
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 100%;
+    background-color: $color-bg;
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3);
+    padding: 24px;
+
+    &.is-open {
+        transform: translateX(0);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+
+    &__close {
+        background: none;
+        border: none;
+        color: $color-secondary;
+        cursor: pointer;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    &__nav {
+        overflow-y: auto;
+        padding-right: 10px;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            li {
+                padding: 0 10px;
+                border-radius: 10px;
+            }
+
+            a {
+                font-size: 18px;
+                font-weight: 600;
+                color: $color-secondary;
+                display: block;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+        }
+    }
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s ease;
+
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+@include media-down(lg) {
+    .main-navigation {
+        display: none;
+    }
+}

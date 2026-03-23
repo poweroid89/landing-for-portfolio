@@ -1,0 +1,59 @@
+// ============================================
+// GLOBAL — Root variables, body defaults, utilities
+// ============================================
+
+:root {
+    // Colors
+    --color-primary: #{$color-primary};
+    --color-secondary: #{$color-secondary};
+    --color-brand: #{$color-brand};
+    --color-brand-hover: #{$color-brand-hover};
+    --color-bg: #{$color-bg};
+    --color-success: #{$color-success};
+    --color-error: #{$color-error};
+
+    // Fonts
+    --font-inter: #{$font-inter};
+    --font-grotesk: #{$font-grotesk};
+    --font-mono: #{$font-mono};
+
+    // Borders
+    --border-white: rgba(255, 255, 255, 0.06);
+    --border-white-heavy: rgba(255, 255, 255, 0.12);
+}
+
+body {
+    font-family: $font-inter;
+    color: $color-primary;
+    background-color: $color-bg;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+}
+
+// ============================================
+// SCROLL ANIMATIONS
+// ============================================
+
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s cubic-bezier(.16, 1, .3, 1),
+        transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-d1 { transition-delay: .08s; }
+.reveal-d2 { transition-delay: .16s; }
+.reveal-d3 { transition-delay: .24s; }
+.reveal-d4 { transition-delay: .32s; }

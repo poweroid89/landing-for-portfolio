@@ -1,0 +1,43 @@
+# =============================================
+# Landing for Portfolio — .gitignore
+# =============================================
+
+# ---- WordPress (не версіонуємо ядро) -------
+wordpress/*
+!wordpress/wp-content/
+wordpress/wp-content/*
+!wordpress/wp-content/plugins/
+wordpress/wp-content/plugins/*
+!wordpress/wp-content/plugins/.gitkeep
+!wordpress/wp-content/themes/
+wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/.gitkeep
+
+# ---- Наша розробка (ОБОВ'ЯЗКОВО ТРЕБА) ------
+!theme/
+!src/
+!tools/
+!docs/
+
+# ---- Тимчасові та згенеровані файли ---------
+node_modules/
+docker/mysql/
+theme/assets/css/*.map
+theme/assets/js/*.map
+# Якщо хочеш ігнорувати скомпільовані стилі (не рекомендовано для портфоліо):
+# theme/assets/css/
+# theme/assets/js/
+
+# ---- Env / Secrets --------------------------
+.env
+.env.*
+!.env.example
+
+# ---- OS / Editor ----------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+terminal_log.md

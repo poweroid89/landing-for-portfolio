@@ -1,0 +1,46 @@
+@use "sass:map";
+
+// Mobile First Media Query Mixin
+// Використання: @include media-up(md) { ... }
+@mixin media-up($name) {
+  $min: map.get($breakpoints, $name);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Брейкпоінт '#{$name}' не знайдено!";
+  }
+}
+
+@mixin media-down($name) {
+  $max: map.get($breakpoints, $name);
+
+  @if $max {
+    @media (max-width: ($max - 0.02)) {
+      @content;
+    }
+  }
+}
+
+// Помічник для Flex-Center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Плавний перехід (Transition)
+@mixin transition($prop: all, $time: 0.3s) {
+  transition: $prop $time ease-in-out;
+}
+
+// Текст, що обрізається (Ellipsis)
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,36 @@
+// 🎨 Colors
+$color-primary: #99a1af;
+$color-secondary: #FFFFFF;
+$color-brand: #00e887;
+$color-brand-hover: #00c970;
+$color-orange: #ff6900;
+$color-bg: #0d0d12;
+$color-success: #05df72;
+$color-warning: #ff8904;
+$color-error: #ff6467;
+
+// 📐 Breakpoints (Mobile First - min-width)
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
+// 📦 Container
+$container-width: 1240px;
+$container-padding: 20px;
+
+$container-max-widths: (
+  'sm': 540px,
+  'md': 720px,
+  'lg': 960px,
+  'xl': 1140px,
+  'xxl': 1320px
+);
+
+// 🖋 Typography
+$font-inter: 'Inter', sans-serif;
+$font-grotesk: 'Space Grotesk', sans-serif;
+$font-mono: 'Geist Mono', monospace;
