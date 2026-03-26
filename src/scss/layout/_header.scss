@@ -1,3 +1,18 @@
+// ============================================
+// HEADER — Site header + mobile drawer
+// ============================================
+// 💡 Чому sticky + backdrop-filter:
+// sticky header завжди видимий при скролі.
+// backdrop-filter: blur() робить напівпрозорий фон
+// з розмиттям — це "glass morphism" ефект.
+// Контент під header красиво розмивається.
+
+// ──────────────────────────────
+// WP ADMIN BAR OFFSET
+// ──────────────────────────────
+// Коли залогінений в WP — з'являється adminbar (32px).
+// Ми зміщуємо header, щоб він не перекривався.
+
 #wpadminbar+.site-header {
     top: 32px;
 }
@@ -18,31 +33,53 @@
     }
 }
 
+// ──────────────────────────────
+// HEADER
+// ──────────────────────────────
+
 .site-header {
-    background-color: rgba($color-bg, 0.95);
-    border-bottom: 1px solid rgba($color-secondary, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(10px);
+
+    @include media-up(lg) {
+        padding-top: 40px;
+    }
 
     &__inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        @include flex-between;
         height: 64px;
+        padding: 12px 15px;
+        border: 1px solid $border-default;
+        border-radius: var(--radius-s);
+
+        @include media-up(lg) {
+            height: 90px;
+            padding: 10px 40px;
+        }
     }
 }
+
+// ──────────────────────────────
+// LOGO / BRANDING
+// ──────────────────────────────
 
 .site-branding {
     .site-title {
         margin: 0;
-        font-family: $font-grotesk;
-        font-size: 24px;
+        font-family: $font-heading; // MTS Wide
+        font-size: 20px;
         font-weight: 700;
 
+        @include media-up(lg) {
+            font-size: 24px;
+        }
+
         a {
-            color: $color-secondary;
+            color: $color-white;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -51,35 +88,73 @@
     }
 }
 
+// ──────────────────────────────
+// DESKTOP NAVIGATION
+// ──────────────────────────────
+
 .main-navigation {
     ul {
         list-style: none;
         margin: 0;
         padding: 0;
         display: flex;
-        gap: 2px;
+        gap: 20px;
+
+        @include media-up(xl) {
+            gap: 30px;
+        }
 
         a {
-            color: $color-primary;
+            color: $color-gray;
             text-decoration: none;
-            font-size: 15px;
+            font-family: $font-body;
+            font-size: $body-m-size-mobile;
             font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 6px 14px;
+            border-radius: $radius-button;
+            position: relative; // потрібно для ::after
+            @include transition-hover(color);
+
+            @include media-up(lg) {
+                font-size: $body-m-size-desktop;
+            }
+
+            // Animated underline: width: 0 → 100% зліва направо
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background-color: $color-white;
+                transform: scaleX(0);
+                transform-origin: left center;
+                transition: transform 0.25s cubic-bezier(.16, 1, .3, 1);
+            }
 
             &:hover {
-                color: $color-secondary;
-                background-color: #141720;
+                color: $color-white;
+
+                &::after {
+                    transform: scaleX(1); // підкреслення "розкривається" зліва→вправо
+                }
             }
         }
 
         li.current-menu-item a {
-            color: $color-secondary;
+            color: $color-white;
+
+            &::after {
+                transform: scaleX(1); // активний пункт — підкреслення завжди видиме
+            }
         }
     }
 }
 
-// Burger Menu
+// ──────────────────────────────
+// BURGER MENU (Mobile)
+// ──────────────────────────────
+
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -97,7 +172,7 @@
         display: block;
         width: 22px;
         height: 2px;
-        background-color: $color-secondary;
+        background-color: $color-white;
         border-radius: 2px;
         transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -107,20 +182,27 @@
     }
 }
 
-// Mobile Drawer
+// ──────────────────────────────
+// MOBILE DRAWER
+// ──────────────────────────────
+// 💡 Чому translateX замість left/right:
+// left/right = Layout animation → лагає.
+// translateX = Composite animation → GPU → 60fps.
+// Це правило #1 перформансних анімацій.
+
 .mobile-drawer {
     position: fixed;
     top: 0;
     left: 0;
     width: 320px;
     height: 100%;
-    background-color: $color-bg;
+    background-color: $color-black;
     z-index: 2000;
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
     padding: 24px;
 
     &.is-open {
@@ -128,22 +210,18 @@
     }
 
     &__header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-between;
         margin-bottom: 40px;
     }
 
     &__close {
         background: none;
         border: none;
-        color: $color-secondary;
+        color: $color-white;
         cursor: pointer;
         padding: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s;
+        @include flex-center;
+        @include transition-hover(opacity);
 
         &:hover {
             opacity: 0.7;
@@ -168,16 +246,22 @@
             }
 
             a {
+                font-family: $font-heading;
                 font-size: 18px;
-                font-weight: 600;
-                color: $color-secondary;
+                font-weight: 500;
+                text-transform: uppercase;
+                color: $color-white;
                 display: block;
                 padding: 10px 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                border-bottom: 1px solid $border-default;
             }
         }
     }
 }
+
+// ──────────────────────────────
+// MOBILE OVERLAY
+// ──────────────────────────────
 
 .mobile-overlay {
     position: fixed;
@@ -187,6 +271,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 1999;
     opacity: 0;
     visibility: hidden;
@@ -202,8 +287,25 @@ body.menu-open {
     overflow: hidden;
 }
 
+// Hide desktop nav on mobile
 @include media-down(lg) {
     .main-navigation {
         display: none;
+    }
+}
+
+// ──────────────────────────────
+// HEADER CTA BUTTON
+// ──────────────────────────────
+
+.header-cta {
+    display: none; // прихована на мобайлі
+
+    @include media-up(lg) {
+        display: inline-flex; // видима на десктопі
+    }
+
+    svg {
+        flex-shrink: 0;
     }
 }

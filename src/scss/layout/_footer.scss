@@ -3,17 +3,18 @@
 // ============================================
 
 .site-footer {
-    border-top: 1px solid rgba($color-secondary, 0.06);
     padding: 40px 0;
 
     &__inner {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex-center;
     }
 
     &__copyright {
-        font-size: 14px;
-        color: rgba($color-primary, 0.6);
+        font-family: $font-heading;
+        font-size: $menu-footer-size; // 12px
+        line-height: $menu-footer-lh; // 14px
+        font-weight: 400;
+        text-transform: uppercase;
+        color: $color-gray;
     }
 }

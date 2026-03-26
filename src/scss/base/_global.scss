@@ -1,35 +1,225 @@
 // ============================================
-// GLOBAL — Root variables, body defaults, utilities
+// GLOBAL — CSS Custom Properties, body, container, animations
 // ============================================
+
+// ──────────────────────────────
+// CSS CUSTOM PROPERTIES
+// ──────────────────────────────
+//
+// 💡 Чому і SCSS-змінні, і CSS-змінні:
+// SCSS-змінні ($brand-primary) — компілюються в значення,
+// зникають у фінальному CSS. Працюють з SCSS-функціями.
+//
+// CSS-змінні (--brand-primary) — живуть у runtime,
+// можна змінювати через JS або media queries.
+//
+// Ми використовуємо обидва: SCSS для компіляції,
+// CSS для runtime-доступу (наприклад, JS-анімації).
 
 :root {
     // Colors
-    --color-primary: #{$color-primary};
-    --color-secondary: #{$color-secondary};
-    --color-brand: #{$color-brand};
-    --color-brand-hover: #{$color-brand-hover};
-    --color-bg: #{$color-bg};
+    --color-black: #{$color-black};
+    --color-white: #{$color-white};
+    --color-gray: #{$color-gray};
+
+    // Brand
+    --brand-primary: #{$brand-primary};
+    --brand-secondary: #{$brand-secondary};
+    --brand-tertiary: #{$brand-tertiary};
+
+    // Borders
+    --border-default: #{$border-default};
+    --border-hover: #{$border-hover};
+
+    // Glare
+    --bg-glare: #{$bg-glare-desktop};
+
+    // Semantic
     --color-success: #{$color-success};
+    --color-warning: #{$color-warning};
     --color-error: #{$color-error};
 
     // Fonts
-    --font-inter: #{$font-inter};
-    --font-grotesk: #{$font-grotesk};
-    --font-mono: #{$font-mono};
+    --font-heading: #{$font-heading};
+    --font-body: #{$font-body};
 
-    // Borders
-    --border-white: rgba(255, 255, 255, 0.06);
-    --border-white-heavy: rgba(255, 255, 255, 0.12);
+    // Border Radius (responsive — mobile за замовчуванням)
+    --radius-s: #{$radius-s-mobile};
+    --radius-m: #{$radius-m-mobile};
+    --radius-l: #{$radius-l-mobile};
+    --radius-button: #{$radius-button};
+
+    @include media-up(lg) {
+        --radius-s: #{$radius-s};
+        --radius-m: #{$radius-m};
+        --radius-l: #{$radius-l};
+    }
 }
+
+// ──────────────────────────────
+// GLOBAL BACKGROUND
+// ──────────────────────────────
+//
+// Mobile-first:
+// Base = mobile (250px кола, -125px offset, мобільний градієнт — 7 смуг)
+// lg+  = desktop (392px кола, -200px offset, десктопний градієнт — 13 смуг)
+
+// ── Desktop змінні
+$glow-size: 392px;
+$glow-blur: 350px;
+$glow-color: rgba(56, 99, 255, 0.9);
+$glow-step-y: 1600px;
+$glow-left-x: -200px;
+$glow-right-x: -200px;
+$glow-left-start-top: -200px;
+$glow-right-start-top: 650px;
+$glow-count: 5;
+
+// ── Mobile змінні
+$glow-size-mobile: 250px;
+$glow-blur-mobile: 250px; // пропорційно менший blur
+$glow-left-x-mobile: -125px; // offset = половина діаметру (125px) — центр на краю екрану
+$glow-right-x-mobile: -125px;
+
+// Мобільний градієнт смужок (з SVG, 7 смуг замість 13)
+$stripe-mobile: linear-gradient(to left,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 1) 12.54%,
+        rgba(255, 255, 255, 0.05) 16.61%,
+        rgba(255, 255, 255, 1) 29.29%,
+        rgba(255, 255, 255, 0.05) 33.33%,
+        rgba(255, 255, 255, 1) 45.80%,
+        rgba(255, 255, 255, 0.05) 49.97%,
+        rgba(255, 255, 255, 1) 62.69%,
+        rgba(255, 255, 255, 0.05) 66.64%,
+        rgba(255, 255, 255, 1) 79.29%,
+        rgba(255, 255, 255, 0.05) 83.32%,
+        rgba(255, 255, 255, 1) 96.04%,
+        rgba(255, 255, 255, 0.05) 100%);
+
+// Десктопний градієнт смужок (з SVG, 13 смуг)
+$stripe-desktop: linear-gradient(to left,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 1) 6.37%,
+        rgba(255, 255, 255, 0.05) 8.34%,
+        rgba(255, 255, 255, 1) 14.66%,
+        rgba(255, 255, 255, 0.05) 16.61%,
+        rgba(255, 255, 255, 1) 22.98%,
+        rgba(255, 255, 255, 0.05) 24.95%,
+        rgba(255, 255, 255, 1) 31.35%,
+        rgba(255, 255, 255, 0.05) 33.33%,
+        rgba(255, 255, 255, 1) 39.71%,
+        rgba(255, 255, 255, 0.05) 41.68%,
+        rgba(255, 255, 255, 1) 47.98%,
+        rgba(255, 255, 255, 0.05) 49.97%,
+        rgba(255, 255, 255, 1) 56.32%,
+        rgba(255, 255, 255, 0.05) 58.29%,
+        rgba(255, 255, 255, 1) 64.67%,
+        rgba(255, 255, 255, 0.05) 66.64%,
+        rgba(255, 255, 255, 1) 73.01%,
+        rgba(255, 255, 255, 0.05) 74.98%,
+        rgba(255, 255, 255, 1) 81.28%,
+        rgba(255, 255, 255, 0.05) 83.32%,
+        rgba(255, 255, 255, 1) 89.67%,
+        rgba(255, 255, 255, 0.05) 91.63%,
+        rgba(255, 255, 255, 1) 97.998%,
+        rgba(255, 255, 255, 0.05) 100%);
+
+.site-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // 💡 height встановлюється динамічно через JS (main.js)
+    // JS слідкує за висотою body через ResizeObserver
+    // і оновлює height .site-bg автоматично.
+    // Це замість хардкоду min-height: 8000px.
+    min-height: 100vh; // fallback до завантаження JS
+    z-index: -1;
+    pointer-events: none;
+    background-color: $color-black;
+    isolation: isolate;
+    overflow: hidden;
+
+    // Смужки — mix-blend-mode: overlay, видимі лише під glow-колами
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: $stripe-mobile; // mobile за замовчуванням (7 смуг)
+        mix-blend-mode: overlay;
+        opacity: 0.35;
+        pointer-events: none;
+
+        @include media-up(lg) {
+            background: $stripe-desktop; // desktop (13 смуг)
+        }
+    }
+}
+
+// Базові стилі glow-кола — Mobile-first (250px)
+.site-bg__glow {
+    position: absolute;
+    width: $glow-size-mobile; // 250px mobile
+    height: $glow-size-mobile;
+    border-radius: 50%;
+    background: $glow-color;
+    filter: blur($glow-blur-mobile); // 250px blur mobile
+
+    @include media-up(lg) {
+        width: $glow-size; // 392px desktop
+        height: $glow-size;
+        filter: blur($glow-blur); // 350px blur desktop
+    }
+}
+
+// Позиція по горизонталі (left/right) — CSS
+// Позиція по вертикалі (top) — inline style з JS
+// 💡 JS обчислює top для кожного glow-кола на основі
+// висоти сторінки і кроку ($glow-step-y = 1600px).
+.site-bg__glow--left {
+    left: $glow-left-x-mobile; // mobile: -125px
+
+    @include media-up(lg) {
+        left: $glow-left-x; // desktop: -200px
+    }
+}
+
+.site-bg__glow--right {
+    right: $glow-right-x-mobile; // mobile: -125px
+
+    @include media-up(lg) {
+        right: $glow-right-x; // desktop: -200px
+    }
+}
+
+
+
+// ──────────────────────────────
+// BODY DEFAULTS
+// ──────────────────────────────
 
 body {
-    font-family: $font-inter;
-    color: $color-primary;
-    background-color: $color-bg;
-    line-height: 1.6;
+    position: relative; // потрібно для position:absolute на .site-bg
+    // overflow-x: clip тепер на html (_reset.scss) — він надійніший
+    font-family: $font-body;
+    font-size: $body-m-size-mobile; // 12px on mobile
+    line-height: $body-m-lh-mobile; // 16px
+    color: $color-gray; // другорядний текст як default
+    background-color: $color-black;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
+
+    @include media-up(lg) {
+        font-size: $body-m-size-desktop; // 16px on desktop
+        line-height: $body-m-lh-desktop; // 20px
+    }
 }
+
+// ──────────────────────────────
+// CONTAINER
+// ──────────────────────────────
 
 .container {
     max-width: $container-width;
@@ -37,9 +227,47 @@ body {
     padding: 0 $container-padding;
 }
 
-// ============================================
-// SCROLL ANIMATIONS
-// ============================================
+.container-0 {
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0;
+}
+
+// ──────────────────────────────
+// ACCESSIBILITY
+// ──────────────────────────────
+
+// 💡 Чому .visually-hidden замість display:none:
+// display:none ховає елемент і від скрін-рідерів.
+// .visually-hidden ховає візуально, але скрін-рідер
+// все ще може прочитати текст. Критично для a11y.
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// ──────────────────────────────
+// SCROLL REVEAL ANIMATIONS
+// ──────────────────────────────
+//
+// 💡 Як працює:
+// 1. Елементу додається клас .reveal
+// 2. Він стартує невидимий (opacity: 0) і зміщений вниз
+// 3. IntersectionObserver в main.js слідкує за елементом
+// 4. Коли елемент потрапляє у viewport → додається .visible
+// 5. CSS transition плавно animує елемент у фінальну позицію
+//
+// Чому transition замість @keyframes:
+// Transition спрацьовує ОДИН раз при зміні класу.
+// @keyframes зациклений і потребує додаткового
+// контролю через animation-fill-mode.
 
 .reveal {
     opacity: 0;
@@ -53,7 +281,48 @@ body {
     transform: translateY(0);
 }
 
-.reveal-d1 { transition-delay: .08s; }
-.reveal-d2 { transition-delay: .16s; }
-.reveal-d3 { transition-delay: .24s; }
-.reveal-d4 { transition-delay: .32s; }
+// Staggered delays — каскадна поява елементів
+// 💡 Чому саме 80ms між delay:
+// 80ms — це "sweet spot" для каскаду. Менше (40ms) —
+// елементи з'являються майже одночасно.
+// Більше (200ms) — відчувається як lag.
+.reveal-d1 {
+    transition-delay: .08s;
+}
+
+.reveal-d2 {
+    transition-delay: .16s;
+}
+
+.reveal-d3 {
+    transition-delay: .24s;
+}
+
+.reveal-d4 {
+    transition-delay: .32s;
+}
+
+.reveal-d5 {
+    transition-delay: .40s;
+}
+
+.reveal-d6 {
+    transition-delay: .48s;
+}
+
+// ──────────────────────────────
+// REDUCED MOTION
+// ──────────────────────────────
+//
+// 💡 Чому це обов'язково:
+// Деякі користувачі мають вестибулярні розлади
+// і увімкнули Reduce Motion в ОС. Ми зобов'язані
+// це поважати — це не "nice to have", це accessibility.
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

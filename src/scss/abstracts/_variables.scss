@@ -1,36 +1,171 @@
-// 🎨 Colors
-$color-primary: #99a1af;
-$color-secondary: #FFFFFF;
-$color-brand: #00e887;
-$color-brand-hover: #00c970;
-$color-orange: #ff6900;
-$color-bg: #0d0d12;
-$color-success: #05df72;
-$color-warning: #ff8904;
-$color-error: #ff6467;
+// ============================================
+// DESIGN TOKENS — Figma → SCSS (Blue variant)
+// ============================================
+// Джерело: Figma Tokens Studio export
+// Оновлено: 2026-03-24
+
+// 🎨 Base Colors
+$color-black: #000000;          // головний фон
+$color-white: #ffffff;          // картки, модалки, панелі
+$color-gray: #b0b0b0;          // другорядний текст
+
+// 🎨 Brand — Blue
+$brand-primary: #1426f3;        // основний brand-колір
+$brand-secondary: #4e63ff;      // другий brand-колір
+$brand-tertiary: #9395f6;       // лейбли з ціною
+$brand-gradient: linear-gradient(135deg, #1426f3 0%, #4e63ff 100%);
+$brand-gradient-hover: linear-gradient(135deg, #0e1fd7 0%, #4357f3 100%);
+
+// 🎨 Surface (поверхні карток, кнопок)
+$surface-default: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.25) 100%);
+$surface-button-default: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.25) 100%);
+$surface-button-hover: rgba(255, 255, 255, 0.2);
+
+// 🎨 Borders
+$border-default: rgba(255, 255, 255, 0.10);  // #ffffff1a
+$border-hover: rgba(255, 255, 255, 0.30);    // #ffffff4d
+
+// 🎨 Background Glare (Blue)
+$bg-glare-desktop: rgba(56, 99, 255, 0.9);   // #3863ffe6
+$bg-glare-mobile: rgba(56, 99, 255, 0.9);    // #3863ffe6
+
+// 🎨 Semantic Colors
+$color-success: #36c26d;
+$color-warning: #ffc542;
+$color-error: #ff4d4d;
+
+// 🖋 Font Families
+// ⚠️ MTS Wide — кастомний шрифт, потрібно self-host (.woff2)
+$font-heading: 'MTS Wide', sans-serif;     // заголовки, кнопки, акценти
+$font-body: 'Montserrat', sans-serif;      // body-тексти
+
+// 📐 Border Radius — Desktop
+$radius-0: 0px;
+$radius-s: 24px;
+$radius-m: 32px;
+$radius-l: 40px;
+$radius-xl: 50px;
+$radius-button: 1000px;   // pill-shape кнопки
+
+// 📐 Border Radius — Mobile
+$radius-s-mobile: 16px;
+$radius-m-mobile: 24px;
+$radius-l-mobile: 32px;
+
+// 💫 Shadows
+$shadow-hover: 0 0 10px rgba(255, 255, 255, 0.2);
 
 // 📐 Breakpoints (Mobile First - min-width)
+// Макет: Mobile 375px | Tablet 768px (без дизайну, авто) | Desktop 1024px+
+// Контент-ширина десктопу: 1240px
 $breakpoints: (
-  'sm': 576px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-  'xxl': 1400px
+  'sm':  480px,   // великий mobile (landscape)
+  'md':  768px,   // tablet portrait — «золота середина»
+  'lg':  1024px,  // ← тут вмикається desktop-дизайн (tablet landscape теж)
+  'xl':  1280px,  // десктоп (близько до 1240px контенту)
+  'xxl': 1440px   // wide desktop
 );
 
 // 📦 Container
+$container-max-width: 1240px;     // ширина контенту з макету
+$container-padding-mobile: 20px;  // відступи на мобайлі
+$container-padding-desktop: 40px; // відступи на десктопі
+// Аліас для зворотної сумісності:
 $container-width: 1240px;
 $container-padding: 20px;
 
-$container-max-widths: (
-  'sm': 540px,
-  'md': 720px,
-  'lg': 960px,
-  'xl': 1140px,
-  'xxl': 1320px
-);
+// 📏 Spacing Scale — з Figma-макету
+// Семантичні назви = одразу зрозуміло де що використовувати
 
-// 🖋 Typography
-$font-inter: 'Inter', sans-serif;
-$font-grotesk: 'Space Grotesk', sans-serif;
-$font-mono: 'Geist Mono', monospace;
+// Між дрібними елементами (іконка + текст, gap у рядку)
+$space-element: 20px;
+
+// Від H2/заголовка секції до блоку контенту
+$space-title-to-content: 60px;
+
+// Внутрішні відступи секції
+$space-inner-sm: 40px;  // менший (наприклад між карточками або підсекціями)
+$space-inner:    80px;  // основний padding всередині секції
+
+// Між секціями (section margin)
+$space-section:  150px;
+
+// Дрібні утиліти (залишаємо для padding кнопок, gap дрібних елементів)
+$space-xs:  8px;
+$space-sm: 12px;
+$space-md: 16px;
+
+// ──────────────────────────────────────────
+// TYPOGRAPHY SCALE (Main Page)
+// Кожен стан має mobile-значення за замовчуванням,
+// desktop-значення застосовується через @include media-up(lg)
+// ──────────────────────────────────────────
+
+// Hero
+$hero-xl-size-mobile: 28px;
+$hero-xl-lh-mobile: 30px;
+$hero-xl-size-desktop: 100px;
+$hero-xl-lh-desktop: 120px;
+
+$hero-l-size-mobile: 24px;
+$hero-l-lh-mobile: 30px;
+$hero-l-size-desktop: 36px;
+$hero-l-lh-desktop: 42px;
+
+$hero-m-size-mobile: 14px;
+$hero-m-lh-mobile: 16px;
+$hero-m-size-desktop: 32px;
+$hero-m-lh-desktop: 40px;
+
+// Headings
+$h1-size-mobile: 20px;
+$h1-lh-mobile: 24px;
+$h1-size-desktop: 40px;
+$h1-lh-desktop: 48px;
+
+$h2-size-mobile: 16px;
+$h2-lh-mobile: 20px;
+$h2-size-desktop: 24px;
+$h2-lh-desktop: 32px;
+
+$h3-size-mobile: 16px;
+$h3-lh-mobile: 20px;
+$h3-size-desktop: 18px;
+$h3-lh-desktop: 26px;
+
+// Body
+$body-l-size-mobile: 14px;
+$body-l-lh-mobile: 16px;
+$body-l-size-desktop: 18px;
+$body-l-lh-desktop: 24px;
+
+$body-m-size-mobile: 12px;
+$body-m-lh-mobile: 16px;
+$body-m-size-desktop: 16px;
+$body-m-lh-desktop: 20px;
+
+// Buttons
+$btn-xl-size-mobile: 16px;
+$btn-xl-lh-mobile: 20px;
+$btn-xl-size-desktop: 24px;
+
+$btn-l-size-mobile: 14px;
+$btn-l-lh-mobile: 20px;
+$btn-l-size-desktop: 18px;
+$btn-l-lh-desktop: 24px;
+
+$btn-m-size-mobile: 12px;
+$btn-m-lh-mobile: 16px;
+$btn-m-size-desktop: 14px;
+
+// Labels
+$label-size-mobile: 10px;
+$label-lh-mobile: 14px;
+$label-size-desktop: 12px;
+$label-lh-desktop: 20px;
+
+// Menu
+$menu-cat-size: 14px;
+$menu-cat-lh: 16px;
+$menu-footer-size: 12px;
+$menu-footer-lh: 14px;

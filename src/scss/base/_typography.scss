@@ -1,25 +1,91 @@
 // ============================================
-// TYPOGRAPHY — Base heading & text styles
+// TYPOGRAPHY — Responsive headings & text
 // ============================================
+// Джерело: Figma Tokens Studio → Main Page
+//
+// 💡 Підхід:
+// Базові стилі = Mobile розміри (без @media).
+// Desktop розміри додаються через @include media-up(lg).
+// Це Mobile-First — менше CSS для мобільних пристроїв.
+
+// ──────────────────────────────
+// HEADINGS (MTS Wide)
+// ──────────────────────────────
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: $font-grotesk;
-    color: $color-secondary;
+    color: $color-white;
     font-weight: 700;
-    line-height: 1.2;
     margin: 0 0 0.5em;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1rem; }
-h6 { font-size: 0.875rem; }
+// H1 — Заголовки секцій (UPPERCASE)
+// Desktop: MTS Wide Bold, 40px/48px
+// Mobile:  MTS Wide Bold, 20px/24px
+h1 {
+    font-family: $font-heading;
+    font-size: $h1-size-mobile;       // 20px
+    line-height: $h1-lh-mobile;       // 24px
+    text-transform: uppercase;
+
+    @include media-up(lg) {
+        font-size: $h1-size-desktop;   // 40px
+        line-height: $h1-lh-desktop;   // 48px
+    }
+}
+
+// H2 — Заголовки всередині секцій (UPPERCASE)
+// Desktop: MTS Wide Bold, 24px/32px
+// Mobile:  MTS Wide Bold, 16px/20px
+h2 {
+    font-family: $font-heading;
+    font-size: $h2-size-mobile;       // 16px
+    line-height: $h2-lh-mobile;       // 20px
+    text-transform: uppercase;
+
+    @include media-up(lg) {
+        font-size: $h2-size-desktop;   // 24px
+        line-height: $h2-lh-desktop;   // 32px
+    }
+}
+
+// H3 — Заголовки в картках (не uppercase!)
+// Desktop: Montserrat Bold, 18px/26px
+// Mobile:  Montserrat Bold, 16px/20px
+//
+// 💡 Чому Montserrat замість MTS Wide для H3:
+// Дизайнер навмисно обрав м'якший шрифт для карток —
+// MTS Wide занадто "кричущий" для невеликих заголовків.
+h3 {
+    font-family: $font-body;          // Montserrat!
+    font-size: $h3-size-mobile;       // 16px
+    line-height: $h3-lh-mobile;       // 20px
+
+    @include media-up(lg) {
+        font-size: $h3-size-desktop;   // 18px
+        line-height: $h3-lh-desktop;   // 26px
+    }
+}
+
+h4 {
+    font-family: $font-body;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+
+    @include media-up(lg) {
+        font-size: 18px;
+        line-height: 26px;
+    }
+}
+
+// ──────────────────────────────
+// BODY TEXT (Montserrat)
+// ──────────────────────────────
 
 p {
+    font-family: $font-body;
     margin: 0 0 1em;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
 small {
@@ -30,6 +96,52 @@ strong, b {
     font-weight: 700;
 }
 
-code, pre {
-    font-family: $font-mono;
+// ──────────────────────────────
+// UTILITY CLASSES
+// ──────────────────────────────
+
+// Текстові утиліти — дозволяють точно контролювати
+// стиль тексту прямо в HTML, без нових класів.
+// Приклад: <p class="text-body-l">Підзаголовок секції</p>
+
+.text-body-l {
+    font-family: $font-body;
+    font-size: $body-l-size-mobile;    // 14px
+    line-height: $body-l-lh-mobile;    // 16px
+    font-weight: 400;
+
+    @include media-up(lg) {
+        font-size: $body-l-size-desktop; // 18px
+        line-height: $body-l-lh-desktop; // 24px
+    }
 }
+
+.text-body-m {
+    font-family: $font-body;
+    font-size: $body-m-size-mobile;    // 12px
+    line-height: $body-m-lh-mobile;    // 16px
+    font-weight: 400;
+
+    @include media-up(lg) {
+        font-size: $body-m-size-desktop; // 16px
+        line-height: $body-m-lh-desktop; // 20px
+    }
+}
+
+.text-label {
+    font-family: $font-body;
+    font-size: $label-size-mobile;     // 10px
+    line-height: $label-lh-mobile;     // 14px
+    font-weight: 500;
+
+    @include media-up(lg) {
+        font-size: $label-size-desktop;  // 12px
+        line-height: $label-lh-desktop;  // 20px
+    }
+}
+
+.text-center { text-align: center; }
+.text-uppercase { text-transform: uppercase; }
+.text-white { color: $color-white; }
+.text-gray { color: $color-gray; }
+.text-brand { color: $brand-secondary; }

@@ -8,7 +8,20 @@
     box-sizing: border-box;
 }
 
-html,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    // 💡 Чому overflow-x: clip замість hidden:
+    // `hidden` створює новий scroll container — DevTools іноді
+    // трактує це неправильно і показує горизонтальний скрол.
+    // `clip` — просто обрізає контент, без scroll container.
+    // Glow-кола (left: -125px / right: -125px) виходять за межі,
+    // але clip їх повністю ховає. Підтримка: 96%+ браузерів.
+    overflow-x: clip;
+}
+
 body {
     margin: 0;
     padding: 0;

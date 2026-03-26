@@ -1,43 +1,163 @@
-@use "sass:map" as *;
-@import "../abstracts/variables";
-
 // ============================================
-// BUTTONS — Global button component
+// BUTTONS — Global button components
 // ============================================
+// Джерело: Figma Tokens → Brand Blue + Button typography
+//
+// 💡 Архітектура кнопок:
+// .btn — базовий стиль (layout, transition)
+// .btn-primary — gradient brand кнопка
+// .btn-secondary — прозора з обводкою
+// .btn-lg / .btn-md / .btn-sm — розміри
+//
+// Всі кнопки використовують font-family: MTS Wide
+// та text-transform: uppercase (з токенів Figma)
 
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 24px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
+    gap: 8px;
+    font-family: $font-heading; // MTS Wide
+    font-weight: 700;
+    text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: $radius-button; // 1000px = pill shape
+    @include transition-hover(background, box-shadow, transform);
+}
 
-    &-primary {
-        background-color: $color-brand;
-        color: #000;
+// ──────────────────────────────
+// VARIANTS
+// ──────────────────────────────
 
-        &:hover {
-            background-color: $color-brand-hover;
+.btn-primary {
+    background: $brand-gradient;
+    color: $color-white;
+    // 💡 Реалізація Inside-бордера через внутрішню тінь (як у Figma)
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.1);
+
+    &:hover {
+        background: $brand-gradient-hover;
+        // Комбінуємо 2 тіні: внутрішня (рамка) + зовнішня (світіння)
+        box-shadow:
+            inset 0 0 0 4px rgba(255, 255, 255, 0.3),
+            0px 0px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    // Кругла іконка-обгортка (Arrow circle)
+    .btn__icon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        width: 54px; // Дефолтний розмір для великих кнопок
+        height: 54px;
+
+        // Base/Surface/Button-Default
+        background: linear-gradient(112.49deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.025) 100%);
+        // 1px "Inside" обводка для іконки
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        border-radius: 32.5px;
+
+        transition: background 0.3s ease;
+    }
+
+    // При наведенні ми міняємо фон іконки
+    &:hover .btn__icon {
+        background: rgba(255, 255, 255, 0.2); // Base/Surface/Button-Hover
+    }
+}
+
+.btn-secondary {
+    background: transparent;
+    color: $color-white;
+    border: 1px solid $border-default;
+
+    &:hover {
+        border-color: $border-hover;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: $shadow-hover;
+    }
+}
+
+// ──────────────────────────────
+// SIZES (Mobile-First)
+// ──────────────────────────────
+//
+// 💡 Чому окремі класи для розмірів:
+// Дизайнер створив 3 розміри кнопок (XL, L, M).
+// Замість дублювання стилів — комбінуємо:
+// <a class="btn btn-primary btn-lg">
+
+// ── Button/XL → .btn-lg — великі hero/CTA кнопки
+.btn-lg {
+    font-size: $btn-xl-size-mobile; // 16px mobile
+    line-height: $btn-xl-lh-mobile; // 20px
+    padding: 16px 32px;
+
+    @include media-up(lg) {
+        font-size: 18px;
+        line-height: 24px;
+        // 💡 Додаємо 4px до Figma-паддінга, бо тінь (inset) "з'їдає" 4px всередину
+        padding: 19px 34px;
+        gap: 30px;
+
+        // Динамічний паддінг, якщо є іконка
+        &:has(.btn__icon) {
+            padding: 15px 19px 15px 30px;
         }
     }
+}
 
-    &-secondary {
-        background-color: rgba(255, 255, 255, 0.05);
-        color: $color-brand;
-        border: 1px solid $color-brand;
+// ── Button/M → .btn-md — стандартні кнопки (header, картки)
+.btn-md {
+    font-size: $btn-l-size-mobile; // 14px mobile
+    line-height: $btn-l-lh-mobile; // 20px
+    padding: 12px 24px;
 
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+    @include media-up(lg) {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 20px 40px;
+        gap: 30px;
+    }
+}
+
+// ── Button/S → .btn-sm — маленькі кнопки
+.btn-sm {
+    font-size: $btn-m-size-mobile; // 12px mobile
+    line-height: $btn-m-lh-mobile; // 16px
+    padding: 8px 20px;
+
+    @include media-up(lg) {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 10px 30px;
+        gap: 30px;
+
+        // Паддінг і розмір іконки для Size=Small+Icon
+        &:has(.btn__icon) {
+            padding: 10px 10px 10px 40px;
+        }
+
+        .btn__icon {
+            width: 30px;
+            height: 30px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
         }
     }
+}
 
-    &-full {
-        width: 100%;
-    }
+
+
+// Full width
+.btn-full {
+    width: 100%;
 }

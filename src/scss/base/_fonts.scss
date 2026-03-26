@@ -1,0 +1,51 @@
+// ============================================
+// @FONT-FACE — Self-hosted MTS Wide
+// ============================================
+//
+// 💡 Чому self-host замість CDN:
+// MTS Wide — кастомний шрифт, його немає на Google Fonts.
+// Self-hosting дає повний контроль над форматом (woff2),
+// display-стратегією, та zero external requests.
+//
+// 💡 Чому тільки .woff2:
+// WOFF2 підтримується 97%+ браузерів і на 30% менший
+// за WOFF1. Немає сенсу тягнути .ttf/.otf/.eot.
+//
+// ⚠️ ВАЖЛИВО: потрібно покласти .woff2 файли в:
+//    theme/assets/fonts/mts-wide/
+//
+// Структура:
+//    theme/assets/fonts/mts-wide/
+//    ├── MTSWide-Regular.woff2
+//    ├── MTSWide-Medium.woff2
+//    └── MTSWide-Bold.woff2
+
+$fonts-path: '../fonts/mts-wide';
+
+@font-face {
+    font-family: 'MTS Wide';
+    src: url('#{$fonts-path}/MTSWide-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    // 💡 font-display: swap
+    // Браузер спочатку показує fallback шрифт (sans-serif),
+    // потім "свопить" на MTS Wide коли він завантажиться.
+    // Це запобігає FOIT (Flash of Invisible Text).
+}
+
+@font-face {
+    font-family: 'MTS Wide';
+    src: url('#{$fonts-path}/MTSWide-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MTS Wide';
+    src: url('#{$fonts-path}/MTSWide-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
