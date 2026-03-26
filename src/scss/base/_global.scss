@@ -222,15 +222,14 @@ body {
 // ──────────────────────────────
 
 .container {
-    max-width: $container-width;
+    max-width: $container-max-width;
     margin: 0 auto;
     padding: 0 $container-padding;
-}
 
-.container-0 {
-    max-width: $container-width;
-    margin: 0 auto;
-    padding: 0;
+    @include media-up(lg) {
+        // На великих екранах контент тепер буде 1240px
+        padding: 0 $container-padding;
+    }
 }
 
 // ──────────────────────────────

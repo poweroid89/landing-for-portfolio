@@ -55,6 +55,7 @@
         padding: 12px 15px;
         border: 1px solid $border-default;
         border-radius: var(--radius-s);
+        max-width: 1240px;
 
         @include media-up(lg) {
             height: 90px;

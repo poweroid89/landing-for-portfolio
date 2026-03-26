@@ -5,29 +5,30 @@
 // Оновлено: 2026-03-24
 
 // 🎨 Base Colors
-$color-black: #000000;          // головний фон
-$color-white: #ffffff;          // картки, модалки, панелі
-$color-gray: #b0b0b0;          // другорядний текст
+$color-black: #000000; // головний фон
+$color-white: #ffffff; // картки, модалки, панелі
+$color-gray: #b0b0b0; // другорядний текст
 
 // 🎨 Brand — Blue
-$brand-primary: #1426f3;        // основний brand-колір
-$brand-secondary: #4e63ff;      // другий brand-колір
-$brand-tertiary: #9395f6;       // лейбли з ціною
+$brand-primary: #1426f3; // основний brand-колір
+$brand-secondary: #4e63ff; // другий brand-колір
+$brand-tertiary: #9395f6; // лейбли з ціною
 $brand-gradient: linear-gradient(135deg, #1426f3 0%, #4e63ff 100%);
 $brand-gradient-hover: linear-gradient(135deg, #0e1fd7 0%, #4357f3 100%);
 
 // 🎨 Surface (поверхні карток, кнопок)
 $surface-default: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.25) 100%);
+$surface-glass: linear-gradient(112.49deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.0125) 100%);
 $surface-button-default: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.25) 100%);
 $surface-button-hover: rgba(255, 255, 255, 0.2);
 
 // 🎨 Borders
-$border-default: rgba(255, 255, 255, 0.10);  // #ffffff1a
-$border-hover: rgba(255, 255, 255, 0.30);    // #ffffff4d
+$border-default: rgba(255, 255, 255, 0.10); // #ffffff1a
+$border-hover: rgba(255, 255, 255, 0.30); // #ffffff4d
 
 // 🎨 Background Glare (Blue)
-$bg-glare-desktop: rgba(56, 99, 255, 0.9);   // #3863ffe6
-$bg-glare-mobile: rgba(56, 99, 255, 0.9);    // #3863ffe6
+$bg-glare-desktop: rgba(56, 99, 255, 0.9); // #3863ffe6
+$bg-glare-mobile: rgba(56, 99, 255, 0.9); // #3863ffe6
 
 // 🎨 Semantic Colors
 $color-success: #36c26d;
@@ -36,8 +37,8 @@ $color-error: #ff4d4d;
 
 // 🖋 Font Families
 // ⚠️ MTS Wide — кастомний шрифт, потрібно self-host (.woff2)
-$font-heading: 'MTS Wide', sans-serif;     // заголовки, кнопки, акценти
-$font-body: 'Montserrat', sans-serif;      // body-тексти
+$font-heading: 'MTS Wide', sans-serif; // заголовки, кнопки, акценти
+$font-body: 'Montserrat', sans-serif; // body-тексти
 
 // 📐 Border Radius — Desktop
 $radius-0: 0px;
@@ -45,31 +46,39 @@ $radius-s: 24px;
 $radius-m: 32px;
 $radius-l: 40px;
 $radius-xl: 50px;
-$radius-button: 1000px;   // pill-shape кнопки
+$radius-button: 1000px; // pill-shape кнопки
 
 // 📐 Border Radius — Mobile
 $radius-s-mobile: 16px;
 $radius-m-mobile: 24px;
 $radius-l-mobile: 32px;
 
-// 💫 Shadows
+// 💫 Shadows & Blurs
 $shadow-hover: 0 0 10px rgba(255, 255, 255, 0.2);
+$shadow-why-it-works: 0 4px 25px rgba(27, 27, 27, 0.05); // Drop shadow 1B1B1B 5% blur 25
+
+$blur-hero: 35px;
+$blur-why-it-works: 75px;
 
 // 📐 Breakpoints (Mobile First - min-width)
 // Макет: Mobile 375px | Tablet 768px (без дизайну, авто) | Desktop 1024px+
 // Контент-ширина десктопу: 1240px
 $breakpoints: (
-  'sm':  480px,   // великий mobile (landscape)
-  'md':  768px,   // tablet portrait — «золота середина»
-  'lg':  1024px,  // ← тут вмикається desktop-дизайн (tablet landscape теж)
-  'xl':  1280px,  // десктоп (близько до 1240px контенту)
-  'xxl': 1440px   // wide desktop
+  'sm': 480px,
+  // великий mobile (landscape)
+  'md': 768px,
+  // tablet portrait — «золота середина»
+  'lg': 1024px,
+  // ← тут вмикається desktop-дизайн (tablet landscape теж)
+  'xl': 1280px,
+  // десктоп (близько до 1240px контенту)
+  'xxl': 1440px // wide desktop
 );
 
 // 📦 Container
-$container-max-width: 1240px;     // ширина контенту з макету
-$container-padding-mobile: 20px;  // відступи на мобайлі
-$container-padding-desktop: 40px; // відступи на десктопі
+$container-width: 1240px; // Бажана ширина контенту
+$container-padding: 20px; // Відступи з кожного боку
+$container-max-width: 1280px; // 1240 + (20 * 2)
 // Аліас для зворотної сумісності:
 $container-width: 1240px;
 $container-padding: 20px;
@@ -84,14 +93,14 @@ $space-element: 20px;
 $space-title-to-content: 60px;
 
 // Внутрішні відступи секції
-$space-inner-sm: 40px;  // менший (наприклад між карточками або підсекціями)
-$space-inner:    80px;  // основний padding всередині секції
+$space-inner-sm: 40px; // менший (наприклад між карточками або підсекціями)
+$space-inner: 80px; // основний padding всередині секції
 
 // Між секціями (section margin)
-$space-section:  150px;
+$space-section: 150px;
 
 // Дрібні утиліти (залишаємо для padding кнопок, gap дрібних елементів)
-$space-xs:  8px;
+$space-xs: 8px;
 $space-sm: 12px;
 $space-md: 16px;
 

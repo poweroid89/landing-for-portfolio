@@ -60,9 +60,9 @@ $hero_image_mobile_2x = hero_get_image_url('hero_image_mobile_2x');
 
 ?>
 
-<section <?=$anchor?> class="
+<section <?= $anchor?> class="
     <?= esc_attr($class_name)?>">
-    <div class="container-0 hero__inner">
+    <div class="container hero__inner">
         <?php if ($title): ?>
         <h1 class="hero__title reveal">
             <?= esc_html($title); ?>
