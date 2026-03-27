@@ -155,8 +155,8 @@
             ]
         },
         {
-            "key": "field_69c3aa706b38d",
-            "label": "Картинка desktop_1x",
+            "key": "field_69c62f3f74cf4",
+            "label": "Картинка desktop 1x",
             "name": "hero_image_desktop_1x",
             "aria-label": "",
             "type": "text",
@@ -176,8 +176,8 @@
             "append": ""
         },
         {
-            "key": "field_69c3b32dca71f",
-            "label": "Картинка desktop_2x",
+            "key": "field_69c62f7774cf5",
+            "label": "Картинка desktop 2x",
             "name": "hero_image_desktop_2x",
             "aria-label": "",
             "type": "text",
@@ -197,8 +197,8 @@
             "append": ""
         },
         {
-            "key": "field_69c3b33cca720",
-            "label": "Картинка mobile_1x",
+            "key": "field_69c62f9074cf6",
+            "label": "Картинка mobile 1x",
             "name": "hero_image_mobile_1x",
             "aria-label": "",
             "type": "text",
@@ -218,8 +218,8 @@
             "append": ""
         },
         {
-            "key": "field_69c3b35fca721",
-            "label": "Картинка mobile_2x",
+            "key": "field_69c62fae74cf7",
+            "label": "Картинка mobile 2x",
             "name": "hero_image_mobile_2x",
             "aria-label": "",
             "type": "text",
@@ -258,5 +258,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774433129
+    "modified": 1774596026
 }

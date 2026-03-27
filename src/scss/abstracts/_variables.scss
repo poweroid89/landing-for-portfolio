@@ -90,7 +90,8 @@ $container-padding: 20px;
 $space-element: 20px;
 
 // Від H2/заголовка секції до блоку контенту
-$space-title-to-content: 60px;
+$space-title-to-content: 75px;
+$space-title-to-content-m: 60px;
 
 // Внутрішні відступи секції
 $space-inner-sm: 40px; // менший (наприклад між карточками або підсекціями)
@@ -152,6 +153,11 @@ $body-m-size-mobile: 12px;
 $body-m-lh-mobile: 16px;
 $body-m-size-desktop: 16px;
 $body-m-lh-desktop: 20px;
+
+$body-s-size-mobile: 10px;
+$body-s-lh-mobile: 14px;
+$body-s-size-desktop: 12px;
+$body-s-lh-desktop: 20px;
 
 // Buttons
 $btn-xl-size-mobile: 16px;

@@ -4,9 +4,11 @@
 .hero {
   &-block {
     padding-top: 60px;
+    margin-bottom: $space-inner-sm;
 
     @include media-up(lg) {
       padding-top: 60px;
+      margin-bottom: $space-section;
     }
   }
 
@@ -127,6 +129,11 @@
     backdrop-filter: blur($blur-hero);
     border-radius: 24px;
 
+    // Fix for text blurring during scale
+    backface-visibility: hidden;
+    transform: translateY(20px) translateZ(0);
+    will-change: transform;
+
     // Нові стилі з варіанту
     position: relative;
     overflow: hidden;
@@ -134,7 +141,6 @@
 
     // Вхідна анімація (fadeUp)
     opacity: 0;
-    transform: translateY(20px);
     transition:
       box-shadow 0.4s ease,
       border-color 0.4s ease,
@@ -150,13 +156,13 @@
     // При появі на екрані (JS додає клас is-visible)
     &.is-visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) translateZ(0);
 
       // Ховер з відблиском
       &:hover {
         border-color: rgba(255, 255, 255, 0.28);
         box-shadow: 0 0 32px rgba(80, 140, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-        transform: translateY(-4px) scale(1.025);
+        transform: translateY(-4px) scale(1.025) translateZ(0);
       }
     }
 
@@ -236,10 +242,5 @@
     font-size: 16px;
     line-height: 1.25; // 20px / 16px
     color: $color-gray;
-
-    // Figma каже, що перший текст має колір White, інші — Gray (#B0B0B0)
-    .hero__stat-card--1 & {
-      color: $color-white;
-    }
   }
 }

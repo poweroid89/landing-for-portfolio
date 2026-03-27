@@ -3,11 +3,11 @@
 
 .why-it-works {
   &-block {
-    padding: $space-inner-sm 0;
+    margin-bottom: $space-inner-sm;
     overflow: hidden;
 
     @include media-up(lg) {
-      padding: $space-section 0;
+      margin-bottom: $space-section;
     }
   }
 
@@ -31,7 +31,7 @@
 
   &__title {
     text-align: center;
-    margin-bottom: $space-title-to-content;
+    margin-bottom: $space-title-to-content-m;
     font-size: $h1-size-mobile;
     line-height: $h1-lh-mobile;
 
@@ -48,7 +48,7 @@
 
     @include media-up(lg) {
       grid-template-columns: repeat(5, 1fr);
-      gap: 32px;
+      gap: 20px;
     }
   }
 
@@ -58,14 +58,16 @@
     background: $surface-glass;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), $shadow-why-it-works;
     border-radius: $radius-s;
-    padding: 20px;
+    padding: 20px 20px 38px;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 
     @include media-down(md) {
-      padding-bottom: 32px; // Відступ між контентом на мобайлі
+      padding-bottom: 32px;
     }
 
     &:hover {
-      transform: translateY(-4px);
+      transform: translateY(-4px) translateZ(0);
 
       .why-it-works__card-icon {
         color: $brand-secondary;

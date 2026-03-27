@@ -1,0 +1,1 @@
+{"version":3,"file":"script.js","sources":["opportunities/script.js"],"sourcesContent":["/**\n * JS for block: opportunities\n */\nconsole.log('opportunities block initialized');\n"],"names":["console","log"],"mappings":"AAGAA,QAAQC,IAAI,iCAAiC"}
