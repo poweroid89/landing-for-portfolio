@@ -36,12 +36,23 @@ function landing_scripts()
         null // null = без версії → кешується browser'ом ефективніше
     );
 
+    // 3. Swiper CSS (CDN)
+    wp_enqueue_style(
+        'swiper-css',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+        [],
+        null
+    );
+
     // ── СТИЛІ ───────────────────────────────────────
 
     // Головний CSS (скомпільований Gulp з SCSS)
     wp_enqueue_style('landing-styles', LANDING_THEME_URI . '/assets/css/main.css', ['landing-fonts-montserrat'], $version);
 
     // ── СКРИПТИ ──────────────────────────────────────
+
+    // Swiper JS (CDN)
+    wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', [], null, true);
 
     // Головний JS (мобільне меню, scroll reveal, анімації)
     // true = підключається в footer (не блокує рендеринг)

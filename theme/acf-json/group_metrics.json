@@ -1,0 +1,81 @@
+{
+    "key": "group_metrics",
+    "title": "Block: Metrics",
+    "fields": [
+        {
+            "key": "field_metrics_title",
+            "label": "Заголовок секції",
+            "name": "title",
+            "type": "text",
+            "default_value": "РОЗГЛЯНЕМО МЕТРИКИ УСПІХУ"
+        },
+        {
+            "key": "field_metrics_list",
+            "label": "Список метрик",
+            "name": "metrics_list",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Додати метрику",
+            "sub_fields": [
+                {
+                    "key": "field_metric_value",
+                    "label": "Значення",
+                    "name": "metric_value",
+                    "type": "text"
+                },
+                {
+                    "key": "field_metric_desc",
+                    "label": "Опис",
+                    "name": "metric_description",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_metrics_slider",
+            "label": "Слайдер статтей",
+            "name": "metrics_slider",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Додати статтю",
+            "sub_fields": [
+                {
+                    "key": "field_metrics_sl_image",
+                    "label": "Обкладинка",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "id"
+                },
+                {
+                    "key": "field_metrics_sl_text",
+                    "label": "Уривок статті",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3
+                },
+                {
+                    "key": "field_metrics_sl_btn_text",
+                    "label": "Текст кнопки",
+                    "name": "button_text",
+                    "type": "text",
+                    "default_value": "ЧИТАТИ ПОВНІСТЮ"
+                },
+                {
+                    "key": "field_metrics_sl_btn_url",
+                    "label": "Посилання кнопки",
+                    "name": "button_url",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/metrics"
+            }
+        ]
+    ]
+}

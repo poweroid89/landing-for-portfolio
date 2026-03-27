@@ -8,6 +8,7 @@
     "why-it-works"
   ],
   "style": "file:../../assets/css/why-it-works/style.css",
+  "script": "file:../../assets/js/why-it-works/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"

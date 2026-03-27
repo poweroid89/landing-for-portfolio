@@ -29,6 +29,7 @@ const blockJson = {
   "keywords": [slug],
   // Шлях до скомпільованого CSS (залежить від Gulp)
   "style": `file:../../assets/css/${slug}/style.css`,
+  "script": `file:../../assets/js/${slug}/script.js`,
   "acf": {
       "mode": "preview",
       "renderTemplate": "render.php"

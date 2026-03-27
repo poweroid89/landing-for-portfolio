@@ -1,14 +1,14 @@
 {
-  "name": "acf/opportunities",
-  "title": "Доступні можливості",
-  "description": "Доступні можливості",
+  "name": "acf/metrics",
+  "title": "Розглянемо метрики успіху",
+  "description": "Метрики успіху",
   "category": "landing-for-portfolio",
   "icon": "layout",
   "keywords": [
-    "opportunities"
+    "metrics"
   ],
-  "style": "file:../../assets/css/opportunities/style.css",
-  "script": "file:../../assets/js/opportunities/script.js",
+  "style": "file:../../assets/css/metrics/style.css",
+  "script": "file:../../assets/js/metrics/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"
