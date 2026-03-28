@@ -79,8 +79,13 @@
 
     &-desc {
       color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: $body-m-size-mobile;
+      line-height: $body-m-lh-mobile;
+
+      @include media-up(lg) {
+        font-size: $body-m-size-desktop;
+        line-height: $body-m-lh-desktop;
+      }
     }
   }
 
