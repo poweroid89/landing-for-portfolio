@@ -1,0 +1,1 @@
+{"version":3,"file":"script.js","sources":["exclusive/script.js"],"sourcesContent":["/**\n * JS for block: exclusive\n */\nconsole.log('exclusive block initialized');\n"],"names":["console","log"],"mappings":"AAGAA,QAAQC,IAAI,6BAA6B"}
