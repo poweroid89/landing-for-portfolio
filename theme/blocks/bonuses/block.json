@@ -1,0 +1,30 @@
+{
+  "name": "acf/bonuses",
+  "title": "Круті бонуси!",
+  "description": "Блок круті бонуси!",
+  "category": "landing-for-portfolio",
+  "icon": "layout",
+  "keywords": [
+    "bonuses"
+  ],
+  "style": "file:../../assets/css/bonuses/style.css",
+  "script": "file:../../assets/js/bonuses/script.js",
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "preview_image_help": "preview_block.jpg"
+      }
+    }
+  }
+}

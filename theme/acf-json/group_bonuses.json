@@ -1,0 +1,101 @@
+{
+    "key": "group_bonuses",
+    "title": "Home page: Bonuses",
+    "fields": [
+        {
+            "key": "field_bonuses_title",
+            "label": "Заголовок",
+            "name": "bonuses_title",
+            "type": "text",
+            "default_value": "КРУТІ БОНУСИ!"
+        },
+        {
+            "key": "field_bonuses_description",
+            "label": "Опис",
+            "name": "bonuses_description",
+            "type": "textarea",
+            "default_value": "Ми реально запарились над тим, щоб створити по-справжньому корисні бонусні продукти.\n\nКожен із них 100% стане у нагоді для наших учасників, достатньо придбати 1 продукт і бонуси твої назавжди!",
+            "rows": 4
+        },
+        {
+            "key": "field_bonuses_image",
+            "label": "Картинка",
+            "name": "bonuses_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_bonuses_button_text",
+            "label": "Текст кнопки",
+            "name": "bonuses_button_text",
+            "type": "text",
+            "default_value": "ПЕРЕЙТИ ДО ПРОДУКТІВ"
+        },
+        {
+            "key": "field_bonuses_button_url",
+            "label": "Посилання кнопки",
+            "name": "bonuses_button_url",
+            "type": "text"
+        },
+        {
+            "key": "field_bonuses_old_price",
+            "label": "Ціна до скидки (на плашці)",
+            "name": "bonuses_old_price",
+            "type": "text",
+            "default_value": "$65"
+        },
+        {
+            "key": "field_bonuses_new_price",
+            "label": "Ціна після скидки (на плашці)",
+            "name": "bonuses_new_price",
+            "type": "text",
+            "default_value": "$0"
+        },
+        {
+            "key": "field_bonuses_list",
+            "label": "Список бонусів",
+            "name": "bonuses_list",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Додати бонус",
+            "sub_fields": [
+                {
+                    "key": "field_bonus_icon",
+                    "label": "SVG іконка (код інлайном)",
+                    "name": "bonus_icon",
+                    "type": "textarea",
+                    "rows": 3
+                },
+                {
+                    "key": "field_bonus_title",
+                    "label": "Назва бонусу",
+                    "name": "bonus_title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_bonus_old_price",
+                    "label": "Ціна до скидки",
+                    "name": "bonus_old_price",
+                    "type": "text"
+                },
+                {
+                    "key": "field_bonus_new_price",
+                    "label": "Ціна після скидки",
+                    "name": "bonus_new_price",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/bonuses"
+            }
+        ]
+    ]
+}
