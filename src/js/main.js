@@ -115,4 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         resizeObserver.observe(document.body);
     }
+
+    /* ── NOTIFICATION BAR ─────────────────────── */
+    const notificationBar = document.getElementById('notification-bar');
+    const notificationClose = document.getElementById('notification-bar-close');
+
+    if (notificationBar) {
+        // Перевіряємо чи було закрито в цій сесії
+        if (sessionStorage.getItem('notification-dismissed')) {
+            notificationBar.classList.add('is-hidden');
+        } else {
+            document.body.classList.add('has-notification');
+        }
+
+        if (notificationClose) {
+            notificationClose.addEventListener('click', () => {
+                notificationBar.classList.add('is-hidden');
+                document.body.classList.remove('has-notification');
+                sessionStorage.setItem('notification-dismissed', '1');
+            });
+        }
+    }
 });
