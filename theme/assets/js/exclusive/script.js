@@ -1,2 +1,2 @@
-console.log("exclusive block initialized");
+document.addEventListener("DOMContentLoaded",()=>{document.querySelector(".exclusive__swiper")&&"undefined"!=typeof Swiper&&new Swiper(".exclusive__swiper",{slidesPerView:1,spaceBetween:16,grabCursor:!0,pagination:{el:".exclusive__pagination",clickable:!0},breakpoints:{480:{slidesPerView:1,spaceBetween:16},768:{slidesPerView:2,spaceBetween:20},1024:{enabled:!1,slidesPerView:2,spaceBetween:20}}})});
 //# sourceMappingURL=script.js.map

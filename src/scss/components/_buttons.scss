@@ -53,8 +53,8 @@
         justify-content: center;
         flex-shrink: 0;
 
-        width: 54px; // Дефолтний розмір для великих кнопок
-        height: 54px;
+        width: 30px; // Дефолтний розмір для великих кнопок
+        height: 30px;
 
         // Base/Surface/Button-Default
         background: linear-gradient(112.49deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.025) 100%);
@@ -63,6 +63,11 @@
         border-radius: 32.5px;
 
         transition: background 0.3s ease;
+
+        @include media-up(lg) {
+            width: 54px; // Дефолтний розмір для великих кнопок
+            height: 54px;
+        }
     }
 
     // При наведенні ми міняємо фон іконки

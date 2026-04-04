@@ -8,7 +8,11 @@
 // "впирається" в краї viewport'у
 
 .testimonials-block {
-  margin-bottom: $space-section;
+  margin-bottom: 60px;
+
+  @include media-up(lg) {
+    margin-bottom: $space-section;
+  }
 }
 
 .testimonials {
@@ -16,7 +20,7 @@
   // --- Заголовок (у container) ---
   &__title {
     text-align: center;
-    margin-bottom: $space-title-to-content-m;
+    margin-bottom: 20px;
     font-size: $h1-size-mobile;
     line-height: $h1-lh-mobile;
 
@@ -31,12 +35,57 @@
   &__slider-wrapper {
     width: 100%;
     overflow: hidden; // Ховаємо overflow на рівні секції
+    padding: 0 16px;
+
+    @include media-up(lg) {
+      padding: 0;
+    }
   }
 
-  // --- Swiper instance ---
   &__swiper {
     width: 100%;
     overflow: visible;
+    position: relative; // added for absolute pagination
+
+    padding-bottom: 28px !important; // Для мобільної навігації через крапочки
+
+    @include media-up(lg) {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  // --- Pagination ---
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0;
+
+    @include media-up(lg) {
+      display: none;
+    }
+
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      margin: 0 !important;
+      background: linear-gradient(112.49deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.0125) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1000px;
+      opacity: 1;
+      transition: all 0.3s ease;
+    }
+
+    .swiper-pagination-bullet-active {
+      width: 24px;
+      background: linear-gradient(90.61deg, #1426F3 0%, #4E63FF 100%);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
   }
 
   // --- Окрема картка ---
@@ -173,12 +222,16 @@
 
   // --- Slider Navigation ---
   &__slider-nav {
-    display: flex;
+    display: none; // Сховано на мобільному, показуються крапочки
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 15px;
     margin-top: 40px;
+
+    @include media-up(lg) {
+      display: flex; // Показується на десктопі
+    }
 
     .swiper-button-next,
     .swiper-button-prev {

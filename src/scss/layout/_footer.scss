@@ -10,21 +10,29 @@
     padding: 40px 0;
 
     &__inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "branding socials"
+            "tagline tagline";
         gap: 20px;
+        align-items: center;
 
         @include media-up(lg) {
+            display: flex;
             flex-direction: row;
             justify-content: space-between;
         }
     }
 
     &__branding {
+        grid-area: branding;
+        text-align: left;
+
         a {
             font-family: $font-heading;
-            font-size: 20px;
+            font-size: $h2-size-mobile;
+            line-height: $h2-lh-mobile;
             font-weight: 700;
             color: $color-white;
             text-decoration: none;
@@ -44,28 +52,32 @@
     }
 
     &__tagline {
+        grid-area: tagline;
         font-family: $font-body;
-        font-size: $body-m-size-mobile;
-        line-height: $body-m-lh-mobile;
+        font-size: $body-m-size-desktop;
+        line-height: $body-m-lh-desktop;
         color: $color-gray;
         margin: 0;
-        text-align: center;
+        text-align: left;
 
         @include media-up(lg) {
+            text-align: center;
             font-size: $body-m-size-desktop;
             line-height: $body-m-lh-desktop;
         }
     }
 
     &__socials {
+        grid-area: socials;
         display: flex;
         align-items: center;
         gap: 12px;
+        justify-content: flex-end;
     }
 
     &__social-link {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         background: $surface-glass;
         border: 1px solid $border-default;
@@ -73,6 +85,11 @@
         align-items: center;
         justify-content: center;
         @include transition-hover(border-color, background);
+
+        @include media-up(lg) {
+            width: 50px;
+            height: 50px;
+        }
 
         &:hover {
             border-color: $border-hover;
@@ -90,6 +107,11 @@
             height: 54px;
             fill: $color-white;
             display: block;
+
+            @include media-up(lg) {
+                width: 54px;
+                height: 54px;
+            }
         }
     }
 }

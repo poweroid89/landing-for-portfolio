@@ -62,22 +62,23 @@ if (!$cards) {
 endif; ?>
 
             <?php if ($cards): ?>
-            <div class="why-it-works__grid">
-                <?php foreach ($cards as $index => $card): ?>
-                <div class="why-it-works__card reveal reveal-d<?= $index + 2?>">
-                    <?php if ($card['icon']): ?>
-                    <div class="why-it-works__card-icon">
-                        <?= $card['icon']; ?>
-                    </div>
-                    <?php
-        endif; ?>
+            <div class="why-it-works__swiper swiper">
+                <div class="why-it-works__grid swiper-wrapper">
+                    <?php foreach ($cards as $index => $card): ?>
+                    <div class="why-it-works__card swiper-slide reveal reveal-d<?= $index + 2?>">
+                    <div class="why-it-works__card-header">
+                        <?php if ($card['icon']): ?>
+                        <div class="why-it-works__card-icon">
+                            <?= $card['icon']; ?>
+                        </div>
+                        <?php endif; ?>
 
-                    <?php if ($card['card_title']): ?>
-                    <h3 class="why-it-works__card-title">
-                        <?= esc_html($card['card_title']); ?>
-                    </h3>
-                    <?php
-        endif; ?>
+                        <?php if ($card['card_title']): ?>
+                        <h3 class="why-it-works__card-title">
+                            <?= esc_html($card['card_title']); ?>
+                        </h3>
+                        <?php endif; ?>
+                    </div>
 
                     <?php if ($card['card_text']): ?>
                     <p class="why-it-works__card-text">
@@ -86,11 +87,11 @@ endif; ?>
                     <?php
         endif; ?>
                 </div>
-                <?php
-    endforeach; ?>
+                <?php endforeach; ?>
+                </div>
+                <div class="why-it-works__pagination swiper-pagination"></div>
             </div>
-            <?php
-endif; ?>
+            <?php endif; ?>
         </div>
     </div>
 </section>

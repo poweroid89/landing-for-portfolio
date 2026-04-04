@@ -15,11 +15,14 @@
   &__title {
     font-size: $hero-xl-size-mobile;
     line-height: $hero-xl-lh-mobile;
-    margin-bottom: 50px;
+    text-align: center;
+    margin-bottom: 20px;
 
     @include media-up(lg) {
       font-size: 70px;
       line-height: 80px;
+      text-align: left;
+      margin-bottom: 50px;
     }
 
     @include media-up(xl) {
@@ -34,7 +37,7 @@
 
   &__content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 60px;
     z-index: 2;
     position: relative;
@@ -48,6 +51,30 @@
   &__content__left {
     max-width: 595px;
     z-index: 2; // Текст поверх всього
+
+    // На мобільному — subtitle нижче кнопки
+    display: flex;
+    flex-direction: column;
+
+    @include media-down(lg) {
+      .hero__subtitle {
+        order: 2;
+        margin-bottom: 0;
+        margin-top: 24px;
+      }
+
+      .hero__actions {
+        order: 1;
+
+        .btn-primary {
+          padding: 10px 10px 10px 20px !important;
+
+          @include media-up(lg) {
+            padding: 16px 32px;
+          }
+        }
+      }
+    }
   }
 
   &__content__right {
@@ -60,17 +87,18 @@
   }
 
   &__subtitle {
-    font-family: $font-heading;
-    font-size: $hero-l-size-mobile;
-    line-height: $hero-l-lh-mobile;
-    font-weight: 500;
-    text-transform: uppercase;
+    font-family: $font-body;
+    font-size: $hero-m-size-mobile;
+    line-height: $hero-m-lh-mobile;
     color: $color-white;
     margin-bottom: 35px;
 
     @include media-up(lg) {
+      font-family: $font-heading;
       font-size: 24px;
       line-height: 32px;
+      font-weight: 500;
+      text-transform: uppercase;
     }
 
     @include media-up(xl) {
@@ -82,31 +110,29 @@
   // Фонова таблетка
   &__image {
     position: absolute;
-    width: 900px;
-    height: 790px;
+    width: 150%;
+    max-width: 150% !important;
+    height: auto;
     z-index: 0;
+    top: -10%;
+    right: -25%;
 
     // Desktop
-    @include media-down(xl) {
+    @include media-up(lg) {
+      width: 100%;
       height: auto;
       right: -239px;
       top: -170px;
     }
 
     @include media-up(xl) {
+      width: 900px;
+      height: 790px;
       right: -139px;
       top: -270px;
       transform: rotate(-5deg);
     }
 
-    // Mobile - підлаштовуємо, щоб не розривала екран
-    @include media-down(md) {
-      right: -30%;
-      top: -100px;
-      width: 150%;
-      height: auto;
-      opacity: 0.8;
-    }
   }
 
   &__stats-wrapper {
@@ -150,8 +176,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 40px;
-    gap: 10px;
+    padding: 20px;
+    gap: 5px;
 
     // При появі на екрані (JS додає клас is-visible)
     &.is-visible {
@@ -167,7 +193,7 @@
     }
 
     // --- Mobile Alignment (Right-Left-Right) ---
-    max-width: 85%;
+    max-width: 50%;
     align-self: flex-end;
 
     &:nth-child(2) {
@@ -178,6 +204,8 @@
     @include media-up(lg) {
       position: absolute;
       max-width: none;
+      padding: 40px;
+      gap: 10px;
 
       &--1 {
         width: 225px;
@@ -231,16 +259,26 @@
   &__stat-num {
     font-family: $font-heading; // MTS Wide
     font-weight: 700;
-    font-size: 36px;
-    line-height: 1.17; // 42px / 36px
+    font-size: $hero-l-size-mobile;
+    line-height: $hero-l-lh-mobile;
     color: $color-white;
+
+    @include media-up(lg) {
+      font-size: $hero-l-size-desktop;
+      line-height: $hero-l-lh-desktop;
+    }
   }
 
   &__stat-label {
     font-family: $font-body; // Montserrat
     font-weight: 400;
-    font-size: 16px;
-    line-height: 1.25; // 20px / 16px
+    font-size: $hero-m-size-mobile;
+    line-height: $hero-m-lh-mobile;
     color: $color-gray;
+
+    @include media-up(lg) {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 }

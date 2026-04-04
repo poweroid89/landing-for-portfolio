@@ -71,9 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
          * @param {string} side - 'left' або 'right'
          * @param {number} startTop - початкова позиція top (px)
          * @param {number} pageHeight - висота сторінки (px)
+         * @param {number} step - крок між колами (px)
          * @returns {DocumentFragment} — фрагмент з div-ами
          */
-        function createGlows(side, startTop, pageHeight) {
+        function createGlows(side, startTop, pageHeight, step) {
             const fragment = document.createDocumentFragment();
             let top = startTop;
 
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 glow.className = `site-bg__glow site-bg__glow--${side}`;
                 glow.style.top = `${top}px`;
                 fragment.appendChild(glow);
-                top += GLOW_STEP;
+                top += Math.max(step, 100); // safety fallback
             }
 
             return fragment;
@@ -93,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
          */
         function updateBackground() {
             const pageHeight = document.documentElement.scrollHeight;
+            const isMobile = window.innerWidth < 1024;
+            const currentStep = isMobile ? 900 : GLOW_STEP;
 
             // 1. Оновлюємо висоту фону
             siteBg.style.height = `${pageHeight}px`;
@@ -102,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
             siteBg.querySelectorAll('.site-bg__glow').forEach(el => el.remove());
 
             // 3. Генеруємо нові для обох сторін
-            siteBg.appendChild(createGlows('left', LEFT_START, pageHeight));
-            siteBg.appendChild(createGlows('right', RIGHT_START, pageHeight));
+            siteBg.appendChild(createGlows('left', LEFT_START, pageHeight, currentStep));
+            siteBg.appendChild(createGlows('right', RIGHT_START, pageHeight, currentStep));
         }
 
         // Перший запуск

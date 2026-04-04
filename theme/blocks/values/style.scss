@@ -2,16 +2,22 @@
 @import "../../../src/scss/abstracts/mixins";
 
 .values-block {
-  margin-bottom: 150px; // Стандартний відступ по лендінгу
+  margin-bottom: 60px;
+
+  @include media-up(lg) {
+    margin-bottom: $space-section;
+  }
 }
 
 .values {
   &__inner {
-    background: $surface-glass;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), $shadow-why-it-works;
-    backdrop-filter: blur($blur-why-it-works);
-    border-radius: $radius-xl;
-    padding: 80px 40px;
+    @include media-up(lg) {
+      background: $surface-glass;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), $shadow-why-it-works;
+      backdrop-filter: blur($blur-why-it-works);
+      border-radius: $radius-xl;
+      padding: 80px 40px;
+    }
   }
 
   &__title {
@@ -32,7 +38,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 
     @include media-down(md) {
       grid-template-columns: repeat(2, 1fr);
@@ -42,13 +48,17 @@
     @include media-down(sm) {
       grid-template-columns: 1fr;
     }
+
+    @include media-up(lg) {
+      margin-bottom: 60px;
+    }
   }
 
   &__card {
     display: flex;
     align-items: center; // Згідно дизайну іконка по вертикалі по центру (або flex-start)
-    padding: 30px 20px;
-    gap: 20px;
+    padding: 15px 20px;
+    gap: 15px;
 
     // Glassmorphism System
     backdrop-filter: blur($blur-why-it-works);
@@ -57,6 +67,11 @@
 
     opacity: 0; // Для JS анімації при скролі
     transform: translateY(20px);
+
+    @include media-up(lg) {
+      padding: 30px 20px;
+      gap: 20px;
+    }
 
     &-icon {
       flex-shrink: 0;
@@ -116,6 +131,22 @@
     display: flex;
     justify-content: center;
     width: 100%;
+
+    .btn-lg {
+      padding: 10px;
+      width: 100%;
+
+      @include media-up(lg) {
+        width: auto;
+      }
+    }
+
+    .btn-primary .btn__icon {
+      @include media-up(lg) {
+        width: 50px;
+        height: 50px;
+      }
+    }
   }
 
   &__btn {

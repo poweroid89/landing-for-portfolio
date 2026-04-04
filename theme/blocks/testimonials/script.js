@@ -7,12 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (testimonialsSwiper && typeof Swiper !== 'undefined') {
         new Swiper('.testimonials__swiper', {
-            slidesPerView: 1.15,
+            slidesPerView: 1,
             spaceBetween: 16,
             grabCursor: true,
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.testimonials__pagination',
+                clickable: true,
             },
             navigation: {
                 nextEl: '.testimonials__swiper-next',
@@ -20,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             breakpoints: {
                 480: {
-                    slidesPerView: 1.5,
+                    slidesPerView: 1,
                     spaceBetween: 16,
                 },
                 768: {

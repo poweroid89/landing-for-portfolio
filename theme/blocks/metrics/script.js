@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 delay: 4000,
                 disableOnInteraction: false,
             },
+            pagination: {
+                el: '.metrics__pagination',
+                clickable: true,
+            },
             navigation: {
                 nextEl: '.metrics__swiper-next',
                 prevEl: '.metrics__swiper-prev',

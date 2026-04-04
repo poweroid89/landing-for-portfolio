@@ -78,6 +78,7 @@ $breakpoints: (
 // 📦 Container
 $container-width: 1240px; // Бажана ширина контенту
 $container-padding: 20px; // Відступи з кожного боку
+$container-padding-mobile: 16px; // Відступи з кожного боку
 $container-max-width: 1280px; // 1240 + (20 * 2)
 // Аліас для зворотної сумісності:
 $container-width: 1240px;
@@ -96,6 +97,7 @@ $space-title-to-content-s: 40px;
 
 // Внутрішні відступи секції
 $space-inner-sm: 40px; // менший (наприклад між карточками або підсекціями)
+$space-inner-lg: 60px; // менший (наприклад між карточками або підсекціями)
 $space-inner: 80px; // основний padding всередині секції
 
 // Між секціями (section margin)

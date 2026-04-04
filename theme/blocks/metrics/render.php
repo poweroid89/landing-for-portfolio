@@ -100,6 +100,7 @@ endif; ?>
                             <?php
     endforeach; ?>
                         </div> <!-- /.swiper-wrapper -->
+                        <div class="metrics__pagination swiper-pagination"></div>
                     </div> <!-- /.swiper -->
                 </div> <!-- /.metrics__col--slider -->
 

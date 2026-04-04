@@ -2,7 +2,11 @@
 @import "../../../src/scss/abstracts/mixins";
 
 .exclusive-block {
-  margin-bottom: $space-section;
+  margin-bottom: 60px;
+
+  @include media-up(lg) {
+    margin-bottom: $space-section;
+  }
 }
 
 .exclusive {
@@ -28,20 +32,57 @@
     }
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-bottom: 40px;
+  &__swiper {
     width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 28px !important;
 
-    @include media-up(md) {
+    @include media-up(lg) {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  &__grid {
+    display: flex;
+
+    @include media-up(lg) {
+      display: grid !important; // Override Swiper
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0;
 
     @include media-up(lg) {
-      margin-bottom: 40px;
+      display: none;
+    }
+
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      margin: 0 !important;
+      background: linear-gradient(112.49deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.0125) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1000px;
+      opacity: 1;
+      transition: all 0.3s ease;
+    }
+
+    .swiper-pagination-bullet-active {
+      width: 24px;
+      background: linear-gradient(90.61deg, #1426F3 0%, #4E63FF 100%);
+      border-color: rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -59,7 +100,7 @@
     text-align: center;
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
     z-index: 1;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 4px 25px rgba(27, 27, 27, .05);
+    height: auto; // Required for Swiper flexibility
 
     @include media-up(lg) {
       padding: 40px;
@@ -172,6 +213,22 @@
     display: flex;
     justify-content: center;
     width: 100%;
+
+    .btn-lg {
+      padding: 10px;
+      width: 100%;
+
+      @include media-up(lg) {
+        width: auto;
+      }
+    }
+
+    .btn-primary .btn__icon {
+      @include media-up(lg) {
+        width: 50px;
+        height: 50px;
+      }
+    }
 
     .btn {
       svg {

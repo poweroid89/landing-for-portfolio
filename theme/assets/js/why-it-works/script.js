@@ -1,2 +1,2 @@
-console.log("why-it-works block initialized");
+document.addEventListener("DOMContentLoaded",()=>{document.querySelector(".why-it-works__swiper")&&"undefined"!=typeof Swiper&&new Swiper(".why-it-works__swiper",{slidesPerView:1,spaceBetween:16,grabCursor:!0,pagination:{el:".why-it-works__pagination",clickable:!0},breakpoints:{480:{slidesPerView:1,spaceBetween:16},768:{slidesPerView:2,spaceBetween:20},1024:{enabled:!1,slidesPerView:5,spaceBetween:20}}})});
 //# sourceMappingURL=script.js.map

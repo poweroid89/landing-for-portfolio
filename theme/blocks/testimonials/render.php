@@ -156,6 +156,7 @@ if (empty($testimonials)) {
                         </div>
                     <?php endforeach; ?>
                 </div> <!-- /.swiper-wrapper -->
+                <div class="testimonials__pagination swiper-pagination"></div>
             </div> <!-- /.swiper -->
 
             <!-- Navigation -->

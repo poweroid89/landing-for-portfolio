@@ -6,7 +6,11 @@
 // ============================================
 
 .cta-final-block {
-  margin-bottom: $space-section;
+  margin-bottom: 0;
+
+  @include media-up(lg) {
+    margin-bottom: $space-section;
+  }
 }
 
 .cta-final {
@@ -19,11 +23,12 @@
     background: $surface-glass;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), $shadow-why-it-works;
     backdrop-filter: blur($blur-why-it-works);
-    border-radius: $radius-xl;
-    padding: 40px 20px;
+    border-radius: $radius-m;
+    padding: 20px 16px;
 
     @include media-up(lg) {
       padding: 80px 40px;
+      border-radius: $radius-xl;
     }
   }
 

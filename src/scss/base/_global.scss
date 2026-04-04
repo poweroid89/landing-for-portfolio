@@ -78,8 +78,8 @@ $glow-count: 5;
 // ── Mobile змінні
 $glow-size-mobile: 250px;
 $glow-blur-mobile: 250px; // пропорційно менший blur
-$glow-left-x-mobile: -125px; // offset = половина діаметру (125px) — центр на краю екрану
-$glow-right-x-mobile: -125px;
+$glow-left-x-mobile: -80px;
+$glow-right-x-mobile: -80px;
 
 // Мобільний градієнт смужок (з SVG, 7 смуг замість 13)
 $stripe-mobile: linear-gradient(to left,
@@ -224,7 +224,7 @@ body {
 .container {
     max-width: $container-max-width;
     margin: 0 auto;
-    padding: 0 $container-padding;
+    padding: 0 $container-padding-mobile;
 
     @include media-up(lg) {
         // На великих екранах контент тепер буде 1240px

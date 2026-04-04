@@ -65,25 +65,28 @@ if ($is_preview && empty($cards)) {
             <?php endif; ?>
 
             <?php if ($cards): ?>
-                <div class="exclusive__grid">
-                    <?php foreach ($cards as $index => $item): 
-                        $delay = ($index % 4) + 1;
-                    ?>
-                        <div class="exclusive__card reveal reveal-d<?= $delay; ?>">
-                            <div class="exclusive__card-glow" aria-hidden="true"></div>
-                            <div class="exclusive__card-image">
-                                <?php if (!empty($item['image']) && isset($item['image']['url'])): ?>
-                                    <img src="<?= esc_url(isset($item['image']['sizes']['large']) ? $item['image']['sizes']['large'] : $item['image']['url']); ?>" alt="<?= esc_attr(isset($item['image']['alt']) ? $item['image']['alt'] : ''); ?>" loading="lazy">
-                                <?php else: ?>
-                                    <div class="exclusive__placeholder">No Image</div>
-                                <?php endif; ?>
+                <div class="exclusive__swiper swiper">
+                    <div class="exclusive__grid swiper-wrapper">
+                        <?php foreach ($cards as $index => $item): 
+                            $delay = ($index % 4) + 1;
+                        ?>
+                            <div class="exclusive__card swiper-slide reveal reveal-d<?= $delay; ?>">
+                                <div class="exclusive__card-glow" aria-hidden="true"></div>
+                                <div class="exclusive__card-image">
+                                    <?php if (!empty($item['image']) && isset($item['image']['url'])): ?>
+                                        <img src="<?= esc_url(isset($item['image']['sizes']['large']) ? $item['image']['sizes']['large'] : $item['image']['url']); ?>" alt="<?= esc_attr(isset($item['image']['alt']) ? $item['image']['alt'] : ''); ?>" loading="lazy">
+                                    <?php else: ?>
+                                        <div class="exclusive__placeholder">No Image</div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="exclusive__card-content">
+                                    <h3 class="exclusive__card-title"><?= esc_html($item['feature_title']); ?></h3>
+                                    <p class="exclusive__card-desc"><?= esc_html($item['feature_description']); ?></p>
+                                </div>
                             </div>
-                            <div class="exclusive__card-content">
-                                <h3 class="exclusive__card-title"><?= esc_html($item['feature_title']); ?></h3>
-                                <p class="exclusive__card-desc"><?= esc_html($item['feature_description']); ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="exclusive__pagination swiper-pagination"></div>
                 </div>
             <?php endif; ?>
 

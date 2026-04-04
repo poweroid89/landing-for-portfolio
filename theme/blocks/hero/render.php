@@ -73,7 +73,7 @@ endif; ?>
         <div class="hero__content">
             <div class="hero__content__left">
                 <p class="hero__subtitle reveal reveal-d1">
-                    <?= esc_html($subtitle); ?>
+                    *&nbsp;<?= esc_html($subtitle); ?>
                 </p>
                 <div class="hero__actions reveal reveal-d2">
                     <a href="<?= esc_url($btn_primary_url); ?>" class="btn btn-primary btn-lg">

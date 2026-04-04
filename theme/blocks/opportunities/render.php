@@ -92,7 +92,7 @@ endif; ?>
 
                         <a href="<?= esc_url($card['button_url'] ?? '#'); ?>"
                             class="btn btn-primary btn-sm opportunities__card-btn">
-                            <?= esc_html($card['button_text'] ?: 'ПЕРЕЙТИ'); ?>
+                            <?= esc_html($card['button_text'] ?: 'Перейти'); ?>
                             <span class="btn__icon">
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

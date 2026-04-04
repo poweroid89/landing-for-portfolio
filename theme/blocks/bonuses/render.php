@@ -79,7 +79,7 @@ if ($is_preview && empty($bonuses_list)) {
                         </div>
                     <?php endif; ?>
 
-                    <div class="bonuses__image">
+                    <div class="bonuses__image desktop-image">
                         <?php if (!empty($image) && isset($image['url'])): ?>
                             <img src="<?= esc_url(isset($image['sizes']['large']) ? $image['sizes']['large'] : $image['url']); ?>"
                                 alt="<?= esc_attr(isset($image['alt']) ? $image['alt'] : ''); ?>" loading="lazy">
@@ -125,6 +125,17 @@ if ($is_preview && empty($bonuses_list)) {
                         </a>
                     </div>
                 </div>
+
+                <!-- Mobile Image appended below -->
+                <div class="bonuses__image mobile-image reveal reveal-d5">
+                    <?php if (!empty($image) && isset($image['url'])): ?>
+                        <img src="<?= esc_url(isset($image['sizes']['large']) ? $image['sizes']['large'] : $image['url']); ?>"
+                            alt="<?= esc_attr(isset($image['alt']) ? $image['alt'] : ''); ?>" loading="lazy">
+                    <?php else: ?>
+                        <div class="bonuses__placeholder-img">Зображення</div>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </div>
     </div>
