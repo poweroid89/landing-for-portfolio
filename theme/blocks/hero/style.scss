@@ -111,7 +111,7 @@
   &__image {
     position: absolute;
     width: 150%;
-    max-width: 150% !important;
+    max-width: 900px !important;
     height: auto;
     z-index: 0;
     top: -10%;
@@ -211,6 +211,12 @@
         width: 225px;
         left: 296px;
         top: -155px;
+
+        @include media-down(xl) {
+          left: auto;
+          right: 0;
+          top: -140px;
+        }
       }
 
       &--2 {
@@ -223,6 +229,11 @@
         width: 225px;
         left: 422px;
         top: 76px;
+
+        @include media-down(xl) {
+          left: auto;
+          right: 0;
+        }
       }
     }
   }

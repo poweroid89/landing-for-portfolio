@@ -18,7 +18,7 @@
     @include media-up(lg) {
       background: $surface-glass;
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), $shadow-why-it-works;
-      backdrop-filter: blur($blur-why-it-works);
+      backdrop-filter: blur($blur-hero);
       border-radius: $radius-xl;
       padding: 80px 40px;
     }
@@ -58,6 +58,7 @@
     @include media-up(lg) {
       display: grid !important; // override Swiper inline style disabled
       grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
     }
 
     .swiper-wrapper {
@@ -110,11 +111,9 @@
     transform: translateZ(0);
 
     // Додаємо min-width для swiper-slide обходу
-    @include media-down(md) {
+    @include media-down(lg) {
+      backdrop-filter: blur($blur-hero);
       height: auto;
-    }
-
-    @include media-down(md) {
       padding-bottom: 32px;
     }
 
@@ -129,7 +128,7 @@
   }
 
   &__card-header {
-    @include media-down(md) {
+    @include media-down(lg) {
       display: flex;
       align-items: center;
       gap: 20px;
@@ -151,7 +150,7 @@
     background: linear-gradient(90.61deg, $brand-primary 0%, $brand-secondary 100%); // Синя заливка градієнтом
     box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .1);
 
-    @include media-down(md) {
+    @include media-down(lg) {
       margin-bottom: 0; // Margin is handled by gap in header wrapper
     }
 
@@ -170,10 +169,6 @@
     font-size: $h3-size-mobile;
     color: $color-white;
     margin-bottom: 0;
-
-    @include media-down(md) {
-      margin-bottom: 0;
-    }
 
     @include media-up(lg) {
       font-size: $h3-size-desktop;

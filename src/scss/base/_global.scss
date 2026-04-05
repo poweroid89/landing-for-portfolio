@@ -135,6 +135,7 @@ $stripe-desktop: linear-gradient(to left,
     // і оновлює height .site-bg автоматично.
     // Це замість хардкоду min-height: 8000px.
     min-height: 100vh; // fallback до завантаження JS
+    max-height: stretch;
     z-index: -1;
     pointer-events: none;
     background-color: $color-black;

@@ -43,7 +43,7 @@ $notification_accent  = get_field('notification_accent', 'option');
 $notification_btn_text = get_field('notification_btn_text', 'option');
 $notification_btn_url  = get_field('notification_btn_url', 'option');
 ?>
-<?php if ($notification_enabled): ?>
+<?php if ($notification_enabled && !isset($_COOKIE['notification_dismissed'])): ?>
     <div class="notification-bar" id="notification-bar">
         <div class="notification-bar__inner">
             <?php if ($notification_text): ?>

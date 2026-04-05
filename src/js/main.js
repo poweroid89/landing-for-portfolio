@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationClose = document.getElementById('notification-bar-close');
 
     if (notificationBar) {
-        // Перевіряємо чи було закрито в цій сесії
-        if (sessionStorage.getItem('notification-dismissed')) {
+        // Перевіряємо чи було закрито (на випадок якщо сторінка закешована)
+        if (document.cookie.indexOf('notification_dismissed=1') !== -1) {
             notificationBar.classList.add('is-hidden');
         } else {
             document.body.classList.add('has-notification');
@@ -135,7 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
             notificationClose.addEventListener('click', () => {
                 notificationBar.classList.add('is-hidden');
                 document.body.classList.remove('has-notification');
-                sessionStorage.setItem('notification-dismissed', '1');
+                
+                // Встановлюємо куку на 24 години
+                const date = new Date();
+                date.setTime(date.getTime() + (24 * 60 * 60 * 1000));
+                document.cookie = "notification_dismissed=1; expires=" + date.toUTCString() + "; path=/";
             });
         }
     }
