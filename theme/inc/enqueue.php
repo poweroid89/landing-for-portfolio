@@ -94,3 +94,29 @@ function landing_admin_assets()
     wp_enqueue_style('landing-admin-styles', LANDING_THEME_URI . '/assets/css/main.css', [], LANDING_VERSION);
 }
 add_action('enqueue_block_editor_assets', 'landing_admin_assets');
+
+/**
+ * Асинхронне завантаження CSS (Google Fonts, Swiper) для PageSpeed
+ * Використовує трюк media="print" onload="this.media='all'"
+ */
+function landing_async_styles($html, $handle, $href, $media)
+{
+    // Стилі, які можна відкласти без шкоди (шрифти, слайдери)
+    $async_handles = ['landing-fonts-montserrat', 'swiper-css'];
+
+    if (in_array($handle, $async_handles)) {
+        $async_html = '<link rel="preload" as="style" href="' . esc_url($href) . '" />' . "\n";
+        $async_html .= '<link rel="stylesheet" id="' . esc_attr($handle) . '-css" href="' . esc_url($href) . '" media="print" onload="this.media=\'all\'" />' . "\n";
+        $async_html .= '<noscript><link rel="stylesheet" href="' . esc_url($href) . '" media="all" /></noscript>' . "\n";
+        return $async_html;
+    }
+
+    // Головний main.css (краще не відкладати повністю, щоб не моргало, але додаємо preload)
+    if ($handle === 'landing-styles') {
+        $preload = '<link rel="preload" as="style" href="' . esc_url($href) . '" />' . "\n";
+        return $preload . $html;
+    }
+
+    return $html;
+}
+add_filter('style_loader_tag', 'landing_async_styles', 10, 4);
