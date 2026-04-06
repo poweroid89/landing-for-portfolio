@@ -5,10 +5,12 @@
   &-block {
     padding-top: 60px;
     margin-bottom: $space-inner-sm;
+    overflow-x: clip; // Обрізає тільки по горизонталі, не чіпає верх-низ
 
     @include media-up(lg) {
       padding-top: 60px;
       margin-bottom: $space-section;
+      overflow-x: visible;
     }
   }
 
