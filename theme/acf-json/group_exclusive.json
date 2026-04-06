@@ -1,0 +1,67 @@
+{
+    "key": "group_exclusive",
+    "title": "Home page: Exclusive",
+    "fields": [
+        {
+            "key": "field_exclusive_title",
+            "label": "Заголовок",
+            "name": "exclusive_title",
+            "type": "text",
+            "default_value": "ЕКСКЛЮЗИВНО ДЛЯ УЧАСНИКІВ"
+        },
+        {
+            "key": "field_exclusive_cards",
+            "label": "Карточки",
+            "name": "exclusive_cards",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Додати карточку",
+            "sub_fields": [
+                {
+                    "key": "field_exclusive_image",
+                    "label": "Картинка",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all"
+                },
+                {
+                    "key": "field_exclusive_feature_title",
+                    "label": "Заголовок картки",
+                    "name": "feature_title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_exclusive_feature_description",
+                    "label": "Опис картки",
+                    "name": "feature_description",
+                    "type": "textarea",
+                    "rows": 3
+                }
+            ]
+        },
+        {
+            "key": "field_exclusive_button_text",
+            "label": "Текст кнопки",
+            "name": "exclusive_button_text",
+            "type": "text",
+            "default_value": "ПЕРЕЙТИ ДО ПРОДУКТІВ"
+        },
+        {
+            "key": "field_exclusive_button_url",
+            "label": "Посилання кнопки",
+            "name": "exclusive_button_url",
+            "type": "text"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/exclusive"
+            }
+        ]
+    ]
+}

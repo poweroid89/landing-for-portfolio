@@ -1,0 +1,30 @@
+{
+  "name": "acf/values",
+  "title": "Цінності проєкту",
+  "description": "Цінності проєкту",
+  "category": "landing-for-portfolio",
+  "icon": "layout",
+  "keywords": [
+    "values"
+  ],
+  "style": "file:../../assets/css/values/style.css",
+  "script": "file:../../assets/js/values/script.js",
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "preview_image_help": "preview_block.jpg"
+      }
+    }
+  }
+}

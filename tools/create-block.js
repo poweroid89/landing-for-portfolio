@@ -27,13 +27,23 @@ const blockJson = {
   "category": "landing-for-portfolio",
   "icon": "layout",
   "keywords": [slug],
+  // Шлях до скомпільованого CSS (залежить від Gulp)
   "style": `file:../../assets/css/${slug}/style.css`,
+  "script": `file:../../assets/js/${slug}/script.js`,
   "acf": {
       "mode": "preview",
       "renderTemplate": "render.php"
   },
   "supports": {
       "align": ["wide", "full"]
+  },
+  "example": {
+      "attributes": {
+          "mode": "preview",
+          "data": {
+              "preview_image_help": "preview_block.jpg"
+          }
+      }
   }
 };
 
@@ -42,6 +52,15 @@ const renderPhp = `<?php
 /**
  * Block: ${slug}
  */
+
+$is_preview = isset($is_preview) ? $is_preview : false;
+
+// Якщо це прев'ю в адмінці і ми маємо placeholder картинку
+if ( $is_preview && isset($block['data']['preview_image_help']) ) {
+    $preview_image_url = get_template_directory_uri() . '/blocks/${slug}/' . $block['data']['preview_image_help'];
+    echo '<img src="' . esc_url($preview_image_url) . '" style="width:100%; height:auto; display:block;" alt="Block Preview">';
+    return;
+}
 
 $anchor = '';
 if (!empty($block['anchor'])) {
@@ -103,9 +122,14 @@ const js = `/**
 console.log('${slug} block initialized');
 `;
 
+// 5. preview_block.jpg заглушка (просто мінімальний валідний base64 JPG)
+// Щоб ACF не видавав 404 помилку, ми створюємо файл заглушки
+const placeholderJpgBase64 = "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=";
+
 fs.writeFileSync(path.join(blockDir, "block.json"), JSON.stringify(blockJson, null, 2));
 fs.writeFileSync(path.join(blockDir, "render.php"), renderPhp);
 fs.writeFileSync(path.join(blockDir, "style.scss"), scss);
 fs.writeFileSync(path.join(blockDir, "script.js"), js);
+fs.writeFileSync(path.join(blockDir, "preview_block.jpg"), Buffer.from(placeholderJpgBase64, 'base64'));
 
 console.log(`\x1b[32m✔ Block Created: theme/blocks/${slug}/\x1b[0m`);

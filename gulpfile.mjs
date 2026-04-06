@@ -17,7 +17,11 @@ const SRC_PATH = './src';
 
 // 1. CLEAN
 export async function clean() {
-    return deleteAsync([`${THEME_PATH}/assets/css/`, `${THEME_PATH}/assets/js/`], { force: true });
+    return deleteAsync([
+        `${THEME_PATH}/assets/css/`, 
+        `${THEME_PATH}/assets/js/`,
+        `${THEME_PATH}/assets/images/`
+    ], { force: true });
 }
 
 // 2. MAIN BUNDLE CSS (Global styles)
@@ -63,6 +67,14 @@ export function scripts() {
         .pipe(browserSync.stream());
 }
 
+// 4.5 IMAGES (Автокопіювання всіх зображень)
+export function images() {
+    // ВАЖЛИВО: options {encoding: false} необхідний для бінарних файлів у нових версіях Gulp, щоб картинки не ламались
+    return src(`${SRC_PATH}/images/**/*`, { encoding: false })
+        .pipe(dest(`${THEME_PATH}/assets/images/`))
+        .pipe(browserSync.stream());
+}
+
 // 5. SERVE
 export function serve(done) {
     browserSync.init({
@@ -77,9 +89,10 @@ export function watchFiles() {
     watch(`${SRC_PATH}/scss/**/*.scss`, stylesMain);
     watch(`${THEME_PATH}/blocks/**/*.scss`, stylesBlocks);
     watch([`${SRC_PATH}/js/**/*.js`, `${THEME_PATH}/blocks/**/*.js`], scripts);
+    watch(`${SRC_PATH}/images/**/*`, images); // 👈 Додали стеження за картинками
     watch(`${THEME_PATH}/**/*.php`).on('change', browserSync.reload);
 }
 
 // TASKS
-export const build = series(clean, parallel(stylesMain, stylesBlocks, scripts));
-export default series(clean, parallel(stylesMain, stylesBlocks, scripts), serve, watchFiles);
+export const build = series(clean, parallel(stylesMain, stylesBlocks, scripts, images));
+export default series(clean, parallel(stylesMain, stylesBlocks, scripts, images), serve, watchFiles);

@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",()=>{if(document.querySelector(".why-it-works__swiper")&&"undefined"!=typeof Swiper){let i=null;var e=window.matchMedia("(max-width: 1023px)"),t=e=>{e.matches?i=i||new Swiper(".why-it-works__swiper",{slidesPerView:1,spaceBetween:16,grabCursor:!0,pagination:{el:".why-it-works__pagination",clickable:!0},breakpoints:{480:{slidesPerView:1,spaceBetween:16},768:{slidesPerView:2,spaceBetween:20}}}):i&&(i.destroy(!0,!0),i=null)};t(e),e.addEventListener("change",t)}});
+//# sourceMappingURL=script.js.map

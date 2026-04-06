@@ -1,0 +1,81 @@
+{
+    "key": "group_testimonials",
+    "title": "Home page: Testimonials",
+    "fields": [
+        {
+            "key": "field_testimonials_title",
+            "label": "Заголовок секції",
+            "name": "title",
+            "type": "text",
+            "default_value": "ВІДГУКИ УЧАСНИКІВ"
+        },
+        {
+            "key": "field_testimonials_items",
+            "label": "Відгуки",
+            "name": "testimonials_items",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Додати відгук",
+            "min": 1,
+            "max": 12,
+            "sub_fields": [
+                {
+                    "key": "field_testimonial_avatar",
+                    "label": "Аватар",
+                    "name": "avatar",
+                    "type": "image",
+                    "return_format": "id",
+                    "preview_size": "thumbnail",
+                    "instructions": "Фото учасника (рекомендовано 80x80px)"
+                },
+                {
+                    "key": "field_testimonial_name",
+                    "label": "Ім'я",
+                    "name": "name",
+                    "type": "text",
+                    "placeholder": "Олена Ковальчук"
+                },
+                {
+                    "key": "field_testimonial_rating",
+                    "label": "Оцінка",
+                    "name": "rating",
+                    "type": "number",
+                    "default_value": 5,
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "instructions": "Оцінка від 1 до 5 зірок"
+                },
+                {
+                    "key": "field_testimonial_text",
+                    "label": "Текст відгуку",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 4
+                },
+                {
+                    "key": "field_testimonial_btn_text",
+                    "label": "Текст кнопки",
+                    "name": "button_text",
+                    "type": "text",
+                    "default_value": "БІЛЬШЕ ПРО HUSTLEHUB"
+                },
+                {
+                    "key": "field_testimonial_btn_url",
+                    "label": "Посилання кнопки",
+                    "name": "button_url",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/testimonials"
+            }
+        ]
+    ]
+}

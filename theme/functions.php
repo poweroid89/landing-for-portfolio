@@ -17,6 +17,7 @@ require_once LANDING_THEME_DIR . '/inc/theme-setup.php';
 require_once LANDING_THEME_DIR . '/inc/enqueue.php';
 require_once LANDING_THEME_DIR . '/inc/register-blocks.php';
 require_once LANDING_THEME_DIR . '/inc/enqueue-assets.php'; // Lazy loading logic
+require_once LANDING_THEME_DIR . '/inc/acf-options.php';     // ACF Options page
 
 /**
  * Helper to check if block is on page (Gutenberg)

@@ -10,31 +10,45 @@
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
 
+    <!-- Global background: dark + blue glows + stripe overlay -->
+    <!-- 💡 Glow-кола генеруються динамічно в main.js -->
+    <!-- JS використовує ResizeObserver щоб слідкувати за висотою -->
+    <!-- і створює рівно стільки кіл, скільки потрібно -->
+    <div class="site-bg" aria-hidden="true"></div>
+
     <header id="masthead" class="site-header">
         <div class="container site-header__inner">
             <div class="site-branding">
                 <?php if (has_custom_logo()): ?>
-                    <?php the_custom_logo(); ?>
-                <?php else: ?>
-                    <div class="site-title">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                            <span><?php bloginfo('name'); ?></span>
-                        </a>
-                    </div>
-                <?php endif; ?>
+                <?php the_custom_logo(); ?>
+                <?php
+else: ?>
+                <div class="site-title">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                        <span>
+                            <?php bloginfo('name'); ?>
+                        </span>
+                    </a>
+                </div>
+                <?php
+endif; ?>
             </div>
 
             <nav id="site-navigation" class="main-navigation">
                 <?php
-                wp_nav_menu(
-                    array(
-                        'theme_location' => 'primary',
-                        'menu_id' => 'primary-menu',
-                        'container' => false,
-                    )
-                );
-                ?>
+wp_nav_menu(
+    array(
+    'theme_location' => 'primary',
+    'menu_id' => 'primary-menu',
+    'container' => false,
+)
+);
+?>
             </nav>
+
+            <a href="#" class="btn btn-primary btn-md header-cta" id="header-telegram-btn">
+                Канал в Telegram
+            </a>
 
 
 
@@ -51,10 +65,9 @@
             <div class="site-branding">
                 <div class="site-title">
                     <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2" />
-                        </svg>
-                        <span><?php bloginfo('name'); ?></span>
+                        <span>
+                            <?php bloginfo('name'); ?>
+                        </span>
                     </a>
                 </div>
             </div>
@@ -67,13 +80,13 @@
         </div>
         <nav class="mobile-drawer__nav">
             <?php
-            wp_nav_menu(
-                array(
-                    'theme_location' => 'primary',
-                    'container' => false,
-                )
-            );
-            ?>
+wp_nav_menu(
+    array(
+    'theme_location' => 'primary',
+    'container' => false,
+)
+);
+?>
         </nav>
 
     </div>

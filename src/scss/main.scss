@@ -1,18 +1,29 @@
-// abstracts
+// ============================================
+// MAIN BUNDLE — Entry point для Gulp
+// ============================================
+//
+// 💡 Порядок імпортів має значення:
+// 1. Abstracts — змінні та міксіни (без CSS-виходу)
+// 2. Base — reset, fonts, typography, global
+// 3. Components — кнопки, форми тощо
+// 4. Layout — header, footer
+//
+// Блоки (ACF blocks) НЕ імпортуються тут!
+// Вони компілюються окремо і lazy-load'яться.
+
+// 1. abstracts (no CSS output — тільки змінні і функції)
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
 
-// base
+// 2. base (фундамент)
+@import 'base/fonts';       // @font-face для MTS Wide
 @import 'base/reset';
 @import 'base/typography';
 @import 'base/global';
 
-// components
+// 3. components
 @import 'components/buttons';
 
-// layout
+// 4. layout
 @import 'layout/header';
 @import 'layout/footer';
-
-// blocks
-// Blocks styles are loaded individually by WordPress via block.json

@@ -1,0 +1,93 @@
+{
+    "key": "group_theme_settings",
+    "title": "Theme Settings",
+    "fields": [
+        {
+            "key": "field_footer_tab",
+            "label": "Футер",
+            "type": "tab"
+        },
+        {
+            "key": "field_footer_tagline",
+            "label": "Слоган футера",
+            "name": "footer_tagline",
+            "type": "text",
+            "default_value": "На*уй фейковий успіх. Будуй справжній!"
+        },
+        {
+            "key": "field_social_links",
+            "label": "Соціальні мережі",
+            "name": "social_links",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Додати соцмережу",
+            "min": 0,
+            "max": 10,
+            "sub_fields": [
+                {
+                    "key": "field_social_icon",
+                    "label": "Іконка (SVG)",
+                    "name": "icon",
+                    "type": "textarea",
+                    "instructions": "Завантажте SVG іконку соцмережі"
+                },
+                {
+                    "key": "field_social_url",
+                    "label": "Посилання",
+                    "name": "url",
+                    "type": "text",
+                    "placeholder": "https://t.me/your_channel"
+                }
+            ]
+        },
+        {
+            "key": "field_notification_tab",
+            "label": "Notification Bar",
+            "type": "tab"
+        },
+        {
+            "key": "field_notification_enabled",
+            "label": "Показувати notification bar",
+            "name": "notification_enabled",
+            "type": "true_false",
+            "default_value": 1,
+            "ui": 1
+        },
+        {
+            "key": "field_notification_text",
+            "label": "Текст",
+            "name": "notification_text",
+            "type": "text",
+            "default_value": "ВСТИГНИ ОТРИМАТИ ЗІ ЗНИЖКОЮ ЗАРАЗ!"
+        },
+        {
+            "key": "field_notification_accent",
+            "label": "Акцентний текст",
+            "name": "notification_accent",
+            "type": "text",
+            "default_value": "-50% НА ВСІ ПРОДУКТИ"
+        },
+        {
+            "key": "field_notification_btn_text",
+            "label": "Текст кнопки",
+            "name": "notification_btn_text",
+            "type": "text",
+            "default_value": "ПЕРЕЙТИ"
+        },
+        {
+            "key": "field_notification_btn_url",
+            "label": "Посилання кнопки",
+            "name": "notification_btn_url",
+            "type": "text"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-settings"
+            }
+        ]
+    ]
+}

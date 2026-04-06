@@ -1,7 +1,21 @@
 @use "sass:map";
 
-// Mobile First Media Query Mixin
-// Використання: @include media-up(md) { ... }
+// ============================================
+// MIXINS — Media queries, helpers
+// ============================================
+
+// ──────────────────────────────────────────
+// MEDIA QUERIES
+// ──────────────────────────────────────────
+
+// Mobile First: min-width (від вужчого до ширшого)
+// Використання: @include media-up(lg) { ... }
+//
+// 💡 Чому Mobile First:
+// Базові стилі пишемо для mobile (без @media),
+// потім додаємо стилі для більших екранів.
+// Це зменшує CSS — мобільним не треба завантажувати
+// desktop-правила, які потім перезаписуються.
 @mixin media-up($name) {
   $min: map.get($breakpoints, $name);
 
@@ -16,6 +30,9 @@
   }
 }
 
+// Desktop First: max-width (від ширшого до вужчого)
+// Використання: @include media-down(md) { ... }
+// Рідко потрібно, але іноді зручно
 @mixin media-down($name) {
   $max: map.get($breakpoints, $name);
 
@@ -26,21 +43,133 @@
   }
 }
 
-// Помічник для Flex-Center
+// ──────────────────────────────────────────
+// LAYOUT HELPERS
+// ──────────────────────────────────────────
+
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-// Плавний перехід (Transition)
-@mixin transition($prop: all, $time: 0.3s) {
-  transition: $prop $time ease-in-out;
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-// Текст, що обрізається (Ellipsis)
+// ──────────────────────────────────────────
+// TRANSITIONS
+// ──────────────────────────────────────────
+
+// 💡 Чому cubic-bezier замість ease/linear:
+// cubic-bezier(.16, 1, .3, 1) — це "ease-out-expo",
+// дає відчуття пружинки. Речі різко стартують і
+// плавно зупиняються — як у native iOS анімаціях.
+@mixin transition($prop: all, $time: 0.3s) {
+  transition: $prop $time cubic-bezier(.16, 1, .3, 1);
+}
+
+// Для hover — швидше (200ms = snappy)
+// Приймає список властивостей: @include transition-hover(background, transform)
+@mixin transition-hover($props...) {
+  $result: ();
+
+  @each $prop in $props {
+    $result: append($result, $prop 0.2s cubic-bezier(.16, 1, .3, 1), comma);
+  }
+
+  @if length($props) == 0 {
+    transition: all 0.2s cubic-bezier(.16, 1, .3, 1);
+  } @else {
+    transition: $result;
+  }
+}
+
+// ──────────────────────────────────────────
+// TEXT HELPERS
+// ──────────────────────────────────────────
+
 @mixin text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+// ──────────────────────────────────────────
+// SECTION PADDING
+// ──────────────────────────────────────────
+
+// Використання: @include section-padding;
+// Автоматично встановлює вертикальні відступи секції
+// з макету: 80px mobile → 150px desktop (між секціями)
+@mixin section-padding {
+  padding-top: $space-inner;        // 80px mobile
+  padding-bottom: $space-inner;
+
+  @include media-up(lg) {
+    padding-top: $space-section;    // 150px desktop
+    padding-bottom: $space-section;
+  }
+}
+
+// Для секцій з меншим відступом (якщо є у макеті)
+@mixin section-padding-sm {
+  padding-top: $space-inner-sm;     // 40px mobile
+  padding-bottom: $space-inner-sm;
+
+  @include media-up(lg) {
+    padding-top: $space-inner;      // 80px desktop
+    padding-bottom: $space-inner;
+  }
+}
+
+// ──────────────────────────────────────────
+// CARD STYLE (переиспользовуємо по макету)
+// ──────────────────────────────────────────
+
+// 💡 Чому mixin замість класу:
+// Mixin вставляє код прямо в селектор блоку,
+// тому стилі залишаються ізольованими (BEM).
+// Клас типу .card потребував би глобального CSS.
+@mixin card-base {
+  background: $surface-default;
+  border: 1px solid $border-default;
+  border-radius: $radius-s-mobile;
+  @include transition-hover(border-color, box-shadow);
+
+  @include media-up(lg) {
+    border-radius: $radius-s;
+  }
+
+  &:hover {
+    border-color: $border-hover;
+    box-shadow: $shadow-hover;
+  }
+}
+
+// ──────────────────────────────────────────
+// GLOW EFFECT (фонові бліки)
+// ──────────────────────────────────────────
+
+// 💡 Чому ::before/::after для glow:
+// Pseudo-елемент з blur не впливає на layout.
+// Він рендериться на GPU як окремий Composite-шар.
+// Анімація glow-ефекту = zero layout cost.
+@mixin glow($color: $bg-glare-desktop, $size: 300px, $blur: 120px) {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background: $color;
+    filter: blur($blur);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
