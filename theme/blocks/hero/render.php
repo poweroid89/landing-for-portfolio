@@ -94,13 +94,11 @@ endif; ?>
             <div class="hero__content__right">
                 <picture>
                     <?php if ($hero_image_desktop_1x): ?>
-                    <img src="<?= esc_url($hero_image_desktop_1x)?>" class="hero__image" alt="Hero Background">
-                    <?php
-else: ?>
+                    <img src="<?= esc_url($hero_image_desktop_1x)?>" class="hero__image" alt="Hero Background" fetchpriority="high" decoding="sync">
+                    <?php else: ?>
                     <img src="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_1x.webp')?>"
-                        class="hero__image" alt="Pill">
-                    <?php
-endif; ?>
+                        class="hero__image" alt="Pill" fetchpriority="high" decoding="sync">
+                    <?php endif; ?>
                 </picture>
 
                 <div class="hero__stats-wrapper">
