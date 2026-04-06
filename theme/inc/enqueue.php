@@ -121,8 +121,14 @@ add_filter('style_loader_tag', 'landing_async_styles', 10, 4);
 function landing_inline_main_css() {
     $css_path = LANDING_THEME_DIR . '/assets/css/main.css';
     if (file_exists($css_path)) {
+        $css_content = file_get_contents($css_path);
+        
+        // Оскільки CSS тепер в <head>, відносні шляхи (../fonts/) зламалися.
+        // Замінюємо їх на абсолютні шляхи до активної теми.
+        $css_content = str_replace('../', LANDING_THEME_URI . '/assets/', $css_content);
+
         echo '<style id="landing-main-inline-css">';
-        echo file_get_contents($css_path);
+        echo $css_content;
         echo '</style>' . "\n";
     }
 }
