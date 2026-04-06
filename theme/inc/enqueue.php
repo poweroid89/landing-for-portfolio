@@ -44,11 +44,9 @@ function landing_scripts()
         null
     );
 
-    // ── СТИЛІ ───────────────────────────────────────
-
-    // Головний CSS (скомпільований Gulp з SCSS)
-    wp_enqueue_style('landing-styles', LANDING_THEME_URI . '/assets/css/main.css', ['landing-fonts-montserrat'], $version);
-
+    // Головний CSS тепер інлайниться прямо в HTML (0 мережевих запитів для FCP)
+    // wp_enqueue_style('landing-styles', LANDING_THEME_URI . '/assets/css/main.css', ['landing-fonts-montserrat'], $version);
+    
     // ── СКРИПТИ ──────────────────────────────────────
 
     // Swiper JS (CDN)
@@ -111,12 +109,21 @@ function landing_async_styles($html, $handle, $href, $media)
         return $async_html;
     }
 
-    // Головний main.css (краще не відкладати повністю, щоб не моргало, але додаємо preload)
-    if ($handle === 'landing-styles') {
-        $preload = '<link rel="preload" as="style" href="' . esc_url($href) . '" />' . "\n";
-        return $preload . $html;
-    }
-
+    // Головний main.css тепер інлайниться, тому тут ми його ігноруємо
     return $html;
 }
 add_filter('style_loader_tag', 'landing_async_styles', 10, 4);
+
+/**
+ * Інлайнимо main.css для досягнення блискавичного FCP
+ * Замість мережевого запиту код стилів вже буде в HTML
+ */
+function landing_inline_main_css() {
+    $css_path = LANDING_THEME_DIR . '/assets/css/main.css';
+    if (file_exists($css_path)) {
+        echo '<style id="landing-main-inline-css">';
+        echo file_get_contents($css_path);
+        echo '</style>' . "\n";
+    }
+}
+add_action('wp_head', 'landing_inline_main_css', 5);
