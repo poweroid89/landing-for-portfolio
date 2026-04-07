@@ -57,18 +57,17 @@ $hero_image_desktop_1x = hero_get_image_url('hero_image_desktop_1x');
 $hero_image_desktop_2x = hero_get_image_url('hero_image_desktop_2x');
 $hero_image_mobile_1x = hero_get_image_url('hero_image_mobile_1x');
 $hero_image_mobile_2x = hero_get_image_url('hero_image_mobile_2x');
-
 ?>
 
-<section <?= $anchor?> class="
-    <?= esc_attr($class_name)?>">
+<section <?= $anchor ?> class="
+    <?= esc_attr($class_name) ?>">
     <div class="container hero__inner">
         <?php if ($title): ?>
-        <h1 class="hero__title reveal">
-            <?= esc_html($title); ?>
-        </h1>
-        <?php
-endif; ?>
+            <h1 class="hero__title reveal">
+                <?= esc_html($title); ?>
+            </h1>
+            <?php
+        endif; ?>
 
         <div class="hero__content">
             <div class="hero__content__left">
@@ -94,27 +93,36 @@ endif; ?>
             <div class="hero__content__right">
                 <picture>
                     <?php if ($hero_image_desktop_1x): ?>
-                    <img src="<?= esc_url($hero_image_desktop_1x)?>" class="hero__image" alt="Hero Background" fetchpriority="high" decoding="sync">
+                        <?php if ($hero_image_mobile_1x || $hero_image_mobile_2x): ?>
+                            <!-- Mobile screens -->
+                            <source media="(max-width: 768px)" srcset="<?= esc_url($hero_image_mobile_1x ?: $hero_image_mobile_2x) ?><?= $hero_image_mobile_2x ? ', ' . esc_url($hero_image_mobile_2x) . ' 2x' : '' ?>">
+                        <?php endif; ?>
+                        
+                        <!-- Desktop screens -->
+                        <source media="(min-width: 769px)" srcset="<?= esc_url($hero_image_desktop_1x) ?><?= $hero_image_desktop_2x ? ', ' . esc_url($hero_image_desktop_2x) . ' 2x' : '' ?>">
+                        
+                        <!-- Fallback -->
+                        <img src="<?= esc_url($hero_image_desktop_1x) ?>" class="hero__image" alt="Hero Background" fetchpriority="high" decoding="sync">
                     <?php else: ?>
-                    <img src="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_1x.webp')?>"
-                        class="hero__image" alt="Pill" fetchpriority="high" decoding="sync">
+                        <source media="(max-width: 768px)" srcset="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_mob_1x.webp') ?>">
+                        <img src="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_1x.webp') ?>" class="hero__image" alt="Pill" fetchpriority="high" decoding="sync">
                     <?php endif; ?>
                 </picture>
 
                 <div class="hero__stats-wrapper">
                     <?php foreach ($stats as $index => $stat): ?>
-                    <div class="hero__stat-card hero__stat-card--<?= $index + 1?>">
-                        <div class="hero__stat-card-shimmer"></div>
-                        <div class="hero__stat-num js-counter-trigger"
-                            data-value="<?= esc_attr($stat['hero_stat_number'])?>">
-                            0
+                        <div class="hero__stat-card hero__stat-card--<?= $index + 1 ?>">
+                            <div class="hero__stat-card-shimmer"></div>
+                            <div class="hero__stat-num js-counter-trigger"
+                                data-value="<?= esc_attr($stat['hero_stat_number']) ?>">
+                                0
+                            </div>
+                            <div class="hero__stat-label">
+                                <?= nl2br(esc_html($stat['hero_stat_label'])) ?>
+                            </div>
                         </div>
-                        <div class="hero__stat-label">
-                            <?= nl2br(esc_html($stat['hero_stat_label']))?>
-                        </div>
-                    </div>
-                    <?php
-endforeach; ?>
+                        <?php
+                    endforeach; ?>
                 </div>
             </div>
         </div>
