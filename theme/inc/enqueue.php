@@ -133,3 +133,34 @@ function landing_inline_main_css() {
     }
 }
 add_action('wp_head', 'landing_inline_main_css', 5);
+
+/**
+ * Add "defer" attribute to JS scripts to eliminate render-blocking and shorten the critical request chain
+ */
+function landing_defer_scripts($tag, $handle, $src)
+{
+    // Відкладаємо Swiper, Main JS та всі скрипти блоків (які містять theme/blocks у шляху)
+    $defer_handles = ['swiper-js', 'landing-scripts'];
+    
+    if (in_array($handle, $defer_handles) || strpos($src, '/blocks/') !== false) {
+        if (strpos($tag, ' defer') === false) {
+            $tag = str_replace(' src', ' defer="defer" src', $tag);
+        }
+    }
+    
+    return $tag;
+}
+add_filter('script_loader_tag', 'landing_defer_scripts', 10, 3);
+
+/**
+ * Preload custom local fonts to prioritize their downloading
+ */
+function landing_preload_local_fonts()
+{
+    $font_medium = LANDING_THEME_URI . '/assets/fonts/mts-wide/MTSWide-Medium.woff2';
+    $font_bold = LANDING_THEME_URI . '/assets/fonts/mts-wide/MTSWide-Bold.woff2';
+    
+    echo '<link rel="preload" href="' . esc_url($font_medium) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
+    echo '<link rel="preload" href="' . esc_url($font_bold) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
+}
+add_action('wp_head', 'landing_preload_local_fonts', 1);
