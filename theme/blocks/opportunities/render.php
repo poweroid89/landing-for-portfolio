@@ -55,7 +55,7 @@ endif; ?>
                 <div class="opportunities__card reveal reveal-d<?= $index + 2?>">
                     <div class="opportunities__card-media">
                         <?php if (!empty($card['image'])): ?>
-                        <?= wp_get_attachment_image($card['image'], 'medium', false, ['class' => 'opportunities__card-img']); ?>
+                        <?= wp_get_attachment_image($card['image'], 'medium', false, ['class' => 'opportunities__card-img', 'loading' => 'lazy']); ?>
                         <?php
     else: ?>
                         <img src="<?= get_template_directory_uri(); ?>/assets/images/placeholder.webp"

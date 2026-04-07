@@ -75,7 +75,7 @@ endif; ?>
                                 <div class="metrics__slide-card">
                                     <?php if (!empty($slide['image'])): ?>
                                     <div class="metrics__slide-img-wrapper">
-                                        <?= wp_get_attachment_image($slide['image'], 'large', false, ['class' => 'metrics__slide-img']); ?>
+                                        <?= wp_get_attachment_image($slide['image'], 'large', false, ['class' => 'metrics__slide-img', 'loading' => 'lazy']); ?>
                                     </div>
                                     <?php
         endif; ?>
