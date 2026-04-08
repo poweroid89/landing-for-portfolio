@@ -33,30 +33,11 @@ $stats = get_field('hero_stats') ?: [
     ['hero_stat_number' => '10 000+', 'hero_stat_label' => 'Учасників'],
     ['hero_stat_number' => '200+', 'hero_stat_label' => 'Матеріалів'],
 ];
-// Helper: розумний парсинг для поля зображення (приймає масив, URL, або відносний рядок)
-if (!function_exists('hero_get_image_url')) {
-    function hero_get_image_url($field_name)
-    {
-        $val = get_field($field_name);
-        if (!$val)
-            return '';
-        // 1: Якщо юзер обрав "Image Array"
-        if (is_array($val))
-            return isset($val['url']) ? $val['url'] : '';
-        // 2: Якщо це відносний текстовий шлях (наприклад "assets/images/X.webp")
-        if (is_string($val) && !preg_match('/^https?:\/\//i', $val) && !str_starts_with($val, '/wp-content/')) {
-            $val = ltrim($val, '/'); // забираємо зайвий слеш на початку, якщо є
-            return get_template_directory_uri() . '/' . $val;
-        }
-        // 3: Якщо це вже готовий лінк
-        return $val;
-    }
-}
 
-$hero_image_desktop_1x = hero_get_image_url('hero_image_desktop_1x');
-$hero_image_desktop_2x = hero_get_image_url('hero_image_desktop_2x');
-$hero_image_mobile_1x = hero_get_image_url('hero_image_mobile_1x');
-$hero_image_mobile_2x = hero_get_image_url('hero_image_mobile_2x');
+$hero_image_desktop_1x = landing_get_image_url(get_field('hero_image_desktop_1x'));
+$hero_image_desktop_2x = landing_get_image_url(get_field('hero_image_desktop_2x'));
+$hero_image_mobile_1x = landing_get_image_url(get_field('hero_image_mobile_1x'));
+$hero_image_mobile_2x = landing_get_image_url(get_field('hero_image_mobile_2x'));
 ?>
 
 <section <?= $anchor ?> class="

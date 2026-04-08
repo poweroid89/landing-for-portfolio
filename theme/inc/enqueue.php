@@ -164,3 +164,53 @@ function landing_preload_local_fonts()
     echo '<link rel="preload" href="' . esc_url($font_bold) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
 }
 add_action('wp_head', 'landing_preload_local_fonts', 1);
+
+/**
+ * Preload the hero image for better LCP (Largest Contentful Paint)
+ */
+function landing_preload_hero_image() {
+    // Only on front page or pages with hero block
+    if ( ! is_front_page() && ! (function_exists('landing_has_block_on_page') && landing_has_block_on_page('hero')) ) {
+        return;
+    }
+
+    $post = get_post();
+    if ( ! $post ) return;
+
+    $blocks = parse_blocks( $post->post_content );
+    $hero_data = null;
+
+    foreach ( $blocks as $block ) {
+        if ( isset($block['blockName']) && $block['blockName'] === 'acf/hero' ) {
+            $hero_data = isset($block['attrs']['data']) ? $block['attrs']['data'] : null;
+            break;
+        }
+    }
+
+    // Default paths from render.php if no image set in block
+    $default_desktop = LANDING_THEME_URI . '/assets/images/photos/pill_1x.webp';
+    $default_mobile  = LANDING_THEME_URI . '/assets/images/photos/pill_mob_1x.webp';
+
+    if ( $hero_data ) {
+        $d1x = isset($hero_data['hero_image_desktop_1x']) ? landing_get_image_url($hero_data['hero_image_desktop_1x']) : '';
+        $d2x = isset($hero_data['hero_image_desktop_2x']) ? landing_get_image_url($hero_data['hero_image_desktop_2x']) : '';
+        $m1x = isset($hero_data['hero_image_mobile_1x']) ? landing_get_image_url($hero_data['hero_image_mobile_1x']) : '';
+        $m2x = isset($hero_data['hero_image_mobile_2x']) ? landing_get_image_url($hero_data['hero_image_mobile_2x']) : '';
+
+        if ( $d1x ) {
+            $desktop_srcset = $d1x . ($d2x ? ", {$d2x} 2x" : "");
+            // For mobile, use mobile fields, or fallback to desktop if empty
+            $actual_m1x = $m1x ?: ($m2x ?: $d1x);
+            $mobile_srcset = $actual_m1x . ($m2x ? ", {$m2x} 2x" : "");
+
+            echo '<link rel="preload" as="image" href="' . esc_url($actual_m1x) . '" imagesrcset="' . esc_attr($mobile_srcset) . '" media="(max-width: 768px)">' . "\n";
+            echo '<link rel="preload" as="image" href="' . esc_url($d1x) . '" imagesrcset="' . esc_attr($desktop_srcset) . '" media="(min-width: 769px)">' . "\n";
+            return;
+        }
+    }
+
+    // Fallback if no specific data found but block exists
+    echo '<link rel="preload" as="image" href="' . esc_url($default_mobile) . '" media="(max-width: 768px)">' . "\n";
+    echo '<link rel="preload" as="image" href="' . esc_url($default_desktop) . '" media="(min-width: 769px)">' . "\n";
+}
+add_action('wp_head', 'landing_preload_hero_image', 1);
