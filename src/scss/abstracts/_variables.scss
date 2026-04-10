@@ -74,6 +74,30 @@ $breakpoints: (
   'xxl': 1440px // wide desktop
 );
 
+// 📐 Bootstrap Grid — Breakpoints Override
+// Синхронізовано з $breakpoints вище, щоб col-lg-* і media-up(lg) збігалися.
+//
+// Bootstrap 5 defaults (залишаємо для референсу — розкоментуй щоб повернути):
+// $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px);
+// $container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px, xxl: 1320px);
+//
+$grid-breakpoints: (
+  xs:  0,
+  sm:  480px,   // our sm  (Bootstrap default: 576px)
+  md:  768px,   // our md  (Bootstrap default: 768px) ← same
+  lg:  1024px,  // our lg  (Bootstrap default: 992px)
+  xl:  1280px,  // our xl  (Bootstrap default: 1200px)
+  xxl: 1440px,  // our xxl (Bootstrap default: 1400px)
+);
+
+$container-max-widths: (
+  sm:  460px,
+  md:  740px,
+  lg:  984px,   // 1024 - 40px padding
+  xl:  1240px,  // наш container-width
+  xxl: 1400px,
+);
+
 // 📦 Container
 $container-width: 1240px; // Бажана ширина контенту
 $container-padding: 20px; // Відступи з кожного боку

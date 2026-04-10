@@ -1,2 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{var e=document.querySelectorAll(".values__card");if(0<e.length){let a=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.style.transition=`all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${e.target.dataset.delay||0}s`,e.target.style.opacity="1",e.target.style.transform="translateY(0)",a.unobserve(e.target))})},{threshold:.1});e.forEach((e,t)=>{e.dataset.delay=.1*t,a.observe(e)})}});
-//# sourceMappingURL=script.js.map

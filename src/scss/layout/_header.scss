@@ -294,19 +294,3 @@ body.menu-open {
         display: none;
     }
 }
-
-// ──────────────────────────────
-// HEADER CTA BUTTON
-// ──────────────────────────────
-
-.header-cta {
-    display: none; // прихована на мобайлі
-
-    @include media-up(lg) {
-        display: inline-flex; // видима на десктопі
-    }
-
-    svg {
-        flex-shrink: 0;
-    }
-}

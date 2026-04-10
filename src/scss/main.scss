@@ -15,6 +15,19 @@
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
 
+// 2. Bootstrap Grid Only
+// ⚠️ Імпортується ПІСЛЯ наших variables — щоб $grid-breakpoints вже були перевизначені.
+// Підключаємо лише: functions → variables → mixins/grid → grid
+// Жодних: reboot, typography, utilities, components
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/variables-dark';
+@import '../../node_modules/bootstrap/scss/maps';
+@import '../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../node_modules/bootstrap/scss/mixins/container';
+@import '../../node_modules/bootstrap/scss/mixins/grid';
+@import '../../node_modules/bootstrap/scss/grid';
+
 // 2. base (фундамент)
 @import 'base/fonts';       // @font-face для MTS Wide
 @import 'base/reset';

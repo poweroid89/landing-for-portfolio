@@ -1,1 +1,0 @@
-{"version":3,"file":"script.js","sources":["bonuses/script.js"],"sourcesContent":["/**\n * JS for block: bonuses\n */\nconsole.log('bonuses block initialized');\n"],"names":["console","log"],"mappings":"AAGAA,QAAQC,IAAI,2BAA2B"}
