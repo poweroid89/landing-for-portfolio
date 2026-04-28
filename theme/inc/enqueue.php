@@ -50,7 +50,7 @@ function landing_scripts()
     // ── СКРИПТИ ──────────────────────────────────────
 
     // Swiper JS (CDN)
-    wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', [], null, true);
+    wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', [], null, ['strategy' => 'defer', 'in_footer' => true]);
 
     // Головний JS (мобільне меню, scroll reveal, анімації)
     // true = підключається в footer (не блокує рендеринг)
@@ -59,7 +59,7 @@ function landing_scripts()
     // JS у <head> блокує parsing HTML → сторінка "завмирає".
     // JS у footer → HTML рендериться спочатку → потім JS.
     // Це критично для LCP (Largest Contentful Paint).
-    wp_enqueue_script('landing-scripts', LANDING_THEME_URI . '/assets/js/main.js', [], $version, true);
+    wp_enqueue_script('landing-scripts', LANDING_THEME_URI . '/assets/js/main.js', [], $version, ['strategy' => 'defer', 'in_footer' => true]);
 
     // PHP → JS дані (AJAX URL, nonce для безпечних запитів)
     wp_localize_script('landing-scripts', 'landingData', [
@@ -143,7 +143,7 @@ function landing_defer_scripts($tag, $handle, $src)
     // Відкладаємо Swiper, Main JS та всі скрипти блоків (які містять theme/blocks у шляху)
     $defer_handles = ['swiper-js', 'landing-scripts'];
 
-    if (in_array($handle, $defer_handles) || strpos($src, '/blocks/') !== false) {
+    if (in_array($handle, $defer_handles) || strpos($src, '/blocks/') !== false || strpos($src, '/assets/js/') !== false) {
         if (strpos($tag, ' defer') === false) {
             $tag = str_replace(' src', ' defer="defer" src', $tag);
         }

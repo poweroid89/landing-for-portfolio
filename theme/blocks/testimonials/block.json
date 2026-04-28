@@ -8,7 +8,7 @@
     "testimonials"
   ],
   "style": "file:../../assets/css/testimonials/style.css",
-  "script": "file:../../assets/js/testimonials/script.js",
+  "viewScript": "file:../../assets/js/testimonials/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"

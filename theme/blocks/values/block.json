@@ -8,7 +8,7 @@
     "values"
   ],
   "style": "file:../../assets/css/values/style.css",
-  "script": "file:../../assets/js/values/script.js",
+  "viewScript": "file:../../assets/js/values/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"

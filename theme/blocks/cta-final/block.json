@@ -8,7 +8,7 @@
     "cta-final"
   ],
   "style": "file:../../assets/css/cta-final/style.css",
-  "script": "file:../../assets/js/cta-final/script.js",
+  "viewScript": "file:../../assets/js/cta-final/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"

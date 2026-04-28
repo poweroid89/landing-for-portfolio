@@ -8,7 +8,7 @@
     "opportunities"
   ],
   "style": "file:../../assets/css/opportunities/style.css",
-  "script": "file:../../assets/js/opportunities/script.js",
+  "viewScript": "file:../../assets/js/opportunities/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"

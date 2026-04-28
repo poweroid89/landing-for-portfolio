@@ -6,7 +6,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Constants
-define( 'LANDING_VERSION', '1.0.1' );
+define( 'LANDING_VERSION', '1.0.2' );
 define( 'LANDING_THEME_DIR', get_template_directory() );
 define( 'LANDING_THEME_URI', get_template_directory_uri() );
 

@@ -8,7 +8,7 @@
     "metrics"
   ],
   "style": "file:../../assets/css/metrics/style.css",
-  "script": "file:../../assets/js/metrics/script.js",
+  "viewScript": "file:../../assets/js/metrics/script.js",
   "acf": {
     "mode": "preview",
     "renderTemplate": "render.php"
