@@ -143,9 +143,12 @@ function landing_defer_scripts($tag, $handle, $src)
     // Відкладаємо Swiper, Main JS та всі скрипти блоків (які містять theme/blocks у шляху)
     $defer_handles = ['swiper-js', 'landing-scripts'];
 
-    if (in_array($handle, $defer_handles) || strpos($src, '/blocks/') !== false || strpos($src, '/assets/js/') !== false) {
+    $is_theme_script = strpos($src, 'theme') !== false || strpos($src, 'assets/js/') !== false || strpos($src, '/blocks/') !== false;
+    $is_acf_block = strpos($handle, 'acf-') === 0;
+
+    if (in_array($handle, $defer_handles) || $is_theme_script || $is_acf_block) {
         if (strpos($tag, ' defer') === false) {
-            $tag = str_replace(' src', ' defer="defer" src', $tag);
+            $tag = str_replace(' src', ' defer src', $tag);
         }
     }
 
