@@ -44,7 +44,7 @@ $hero_image_mobile_2x = landing_get_image_url(get_field('hero_image_mobile_2x'))
     <?= esc_attr($class_name) ?>">
     <div class="container hero__inner">
         <?php if ($title): ?>
-            <h1 class="hero__title reveal">
+            <h1 class="hero__title">
                 <?= esc_html($title); ?>
             </h1>
             <?php
@@ -52,10 +52,10 @@ $hero_image_mobile_2x = landing_get_image_url(get_field('hero_image_mobile_2x'))
 
         <div class="hero__content">
             <div class="hero__content__left">
-                <p class="hero__subtitle reveal reveal-d1">
+                <p class="hero__subtitle">
                     *&nbsp;<?= esc_html($subtitle); ?>
                 </p>
-                <div class="hero__actions reveal reveal-d2">
+                <div class="hero__actions">
                     <a href="<?= esc_url($btn_primary_url); ?>" class="btn btn-primary btn-lg">
                         <?= esc_html($btn_primary_txt); ?>
 
@@ -76,17 +76,22 @@ $hero_image_mobile_2x = landing_get_image_url(get_field('hero_image_mobile_2x'))
                     <?php if ($hero_image_desktop_1x): ?>
                         <?php if ($hero_image_mobile_1x || $hero_image_mobile_2x): ?>
                             <!-- Mobile screens -->
-                            <source media="(max-width: 768px)" srcset="<?= esc_url($hero_image_mobile_1x ?: $hero_image_mobile_2x) ?><?= $hero_image_mobile_2x ? ', ' . esc_url($hero_image_mobile_2x) . ' 2x' : '' ?>">
+                            <source media="(max-width: 768px)"
+                                srcset="<?= esc_url($hero_image_mobile_1x ?: $hero_image_mobile_2x) ?><?= $hero_image_mobile_2x ? ', ' . esc_url($hero_image_mobile_2x) . ' 2x' : '' ?>">
                         <?php endif; ?>
-                        
+
                         <!-- Desktop screens -->
-                        <source media="(min-width: 769px)" srcset="<?= esc_url($hero_image_desktop_1x) ?><?= $hero_image_desktop_2x ? ', ' . esc_url($hero_image_desktop_2x) . ' 2x' : '' ?>">
-                        
+                        <source media="(min-width: 769px)"
+                            srcset="<?= esc_url($hero_image_desktop_1x) ?><?= $hero_image_desktop_2x ? ', ' . esc_url($hero_image_desktop_2x) . ' 2x' : '' ?>">
+
                         <!-- Fallback -->
-                        <img src="<?= esc_url($hero_image_desktop_1x) ?>" class="hero__image" alt="Hero Background" fetchpriority="high" decoding="sync">
+                        <img src="<?= esc_url($hero_image_desktop_1x) ?>" class="hero__image" alt="Hero Background"
+                            fetchpriority="high" decoding="sync">
                     <?php else: ?>
-                        <source media="(max-width: 768px)" srcset="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_mob_1x.webp') ?>">
-                        <img src="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_1x.webp') ?>" class="hero__image" alt="Pill" fetchpriority="high" decoding="sync">
+                        <source media="(max-width: 768px)"
+                            srcset="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_mob_1x.webp') ?>">
+                        <img src="<?= esc_url(get_template_directory_uri() . '/assets/images/photos/pill_1x.webp') ?>"
+                            class="hero__image" alt="Pill" fetchpriority="high" decoding="sync">
                     <?php endif; ?>
                 </picture>
 
